@@ -14,5 +14,5 @@ int menu(){
   std::cout << std::endl << "Please enter a game mode number: ";
   int select;
   std::cin >> select;
-  return 0;
+  return select;
 }
