@@ -1,9 +1,12 @@
+#include <vector>
+
 class Player {
 private:
   int shotsPerRound;
   int playerType;
   int numOfShips;
   int bombs;
+  std::vector<std::string> shipLocations;
 
   
 public:
@@ -17,4 +20,3 @@ public:
   void setNumOfBombs(int b);
   int getNumOfBombs();
 };
-

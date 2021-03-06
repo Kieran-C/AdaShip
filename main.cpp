@@ -62,4 +62,3 @@ int main() {
   int mode = menu();
   gamemodeSetup(mode, setup);
 }
-

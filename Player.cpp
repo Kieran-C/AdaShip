@@ -48,3 +48,11 @@ void Player::setNumOfBombs(int b){
 int Player::getNumOfBombs(){
   return Player::bombs;
 }
+
+bool Player::checkForShipAtLocation(std::string loc, bool destroyIfFound){
+  for (int i = 0; i <= Player::shipLocations.size(); i++){
+    if ((Player::shipLocations[i].compare(loc)) && (destroyIfFound)){
+      Player::shipLocations.erase(Player::shipLocations.begin()+i);
+    }
+  }
+}
