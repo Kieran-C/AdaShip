@@ -19,4 +19,5 @@ public:
   int getNumOfShips();
   void setNumOfBombs(int b);
   int getNumOfBombs();
+  bool checkForShipAtLocation(std::string loc, bool destroyIfFound);
 };
