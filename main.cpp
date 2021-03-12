@@ -10,8 +10,6 @@ void gamemodeSetup(int mode, mINI::INIStructure setup){
     case 1: {
       Player p1(1, 1, setup["ships"].size(), 0);
       Player p2(2, 1, setup["ships"].size(), 0);
-      std::cout << "P1: " << p1.getPlayerType() << "Num of Ships: "<<p1.getNumOfShips() << std::endl;
-      std::cout << "P2: " << p2.getPlayerType() << "Num of Ships: "<<p2.getNumOfShips() << std::endl;
       break;
     }
     case 2:{
