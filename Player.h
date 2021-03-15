@@ -2,6 +2,7 @@
 
 class Player {
 private:
+  int playerId;
   int shotsPerRound;
   int playerType;
   int numOfShips;
@@ -10,7 +11,9 @@ private:
 
   
 public:
-  Player(int passedPlayerType, int passedMode, int passedNumberOfShips, int passedBombs);
+  Player(int passedPlayerId, int passedPlayerType, int passedMode, int passedNumberOfShips, int passedBombs);
+  void setPlayerId(int d);
+  int getPlayerId();
   void setShotsPerRound(int s);
   int getShotsPerRound();
   void setPlayerType(int t);

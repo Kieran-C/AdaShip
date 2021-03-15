@@ -1,7 +1,8 @@
 #include <iostream>
 #include "Player.h"
 
-Player::Player(int passedPlayerType, int passedMode, int passedNumberOfShips, int passedBombs){
+Player::Player(int passedPlayerId, int passedPlayerType, int passedMode, int passedNumberOfShips, int passedBombs){
+    playerId = passedPlayerId;
     playerType = passedPlayerType;
     bombs = passedBombs;
     if (passedMode == 1){
@@ -16,6 +17,13 @@ Player::Player(int passedPlayerType, int passedMode, int passedNumberOfShips, in
     numOfShips = passedNumberOfShips;
 }
 
+void Player::setPlayerId(int d){
+  Player::playerId = d;
+}
+
+int Player::getPlayerId(){
+  return Player::playerId;
+}
 
 void Player::setShotsPerRound(int s) {
   Player::shotsPerRound = s;

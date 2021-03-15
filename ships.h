@@ -10,4 +10,5 @@ class ships {
 
   public:
     ships(std::string type, std::string passedDirection, mINI::INIStructure setup);
+    // void ships::addShipToList();
 };
