@@ -5,8 +5,11 @@
 #include "Player.h"
 #include "libarys/ini.h"
 #include <vector>
+// #include "ships.h"
+// #include "ships.cpp"
 
 std::vector<Player> playerList;
+std::vector<std::string> shipTypes {"carrier", "battleship", "destroyer", "submarine", "patrolBoat"};
 
 void gamemodeSetup(int mode, mINI::INIStructure setup){
   switch(mode){
@@ -62,7 +65,9 @@ void gamemodeSetup(int mode, mINI::INIStructure setup){
 int main() {
   std::cout << "Starting up...\n\n";
   mINI::INIStructure setup = readIni();
-  int mode = menu();
-  gamemodeSetup(mode, setup);
-  setupShips()
+  std::vector<std::vector<int>> boardLayout = createBoardMap(setup);
+  // int mode = menu();
+  // gamemodeSetup(mode, setup);
+  // shipCreation(playerList.size(), shipTypes);
+  // shipCreation(playerList.size(), shipTypes);
 }
