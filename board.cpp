@@ -10,7 +10,23 @@ board::board(mINI::INIStructure setup){
   height = stoi(setup["board"]["y"]);
 }
 
-int boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> boardLayout){
+int board::getWidth(){
+  return board::width;
+}
+
+void board::setWidth(int passedWidth){
+  board::width = passedWidth;
+}
+
+int board::getHeight(){
+  return board::height;
+}
+
+void board::setHeight(int passedHeight){
+  board::height = passedHeight;
+}
+
+int board::boardDraw(mINI::INIStructure setup){
   int maxX = 0;
   for (int y = 0; y < stoi(setup["board"]["y"]); y++){
     for (int i = 0; i < (stoi(setup["board"]["x"])+1); i++){
@@ -66,5 +82,5 @@ std::vector<std::vector<int>> addShipsToBoard(std::vector<std::vector<int>> boar
 
 void boardSetup(mINI::INIStructure setup) {
   std::vector<std::vector<int>> boardLayout = createBoardMap(setup);
-  boardDraw(setup, boardLayout);
+  // board::boardDraw(setup, boardLayout);
 }

@@ -11,5 +11,12 @@ class Ships {
 
   public:
     Ships(std::string type, std::string passedDirection, mINI::INIStructure setup);
-    static void shipCreation(int numOfPlayers, std::vector<std::string> shipTypes);
+    int getLength();
+    void setLength(int passedLength);
+    bool getActive();
+    void setActive(bool passedActive);
+    std::string getDirection();
+    void setDirection(std::string passedDirection);
+    int getHealth();
+    void setHealth(int passedHealth);
 };

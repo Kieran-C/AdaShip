@@ -13,8 +13,34 @@ Ships::Ships(std::string type, std::string passedDirection, mINI::INIStructure s
   health = std::stoi(setup["ships"][type]);
 }
 
-void shipCreation(int numOfPlayers, std::vector<std::string> shipTypes){
-  for (int i = 0; i < numOfPlayers; i++){
-      std::cout << "TEST" << std::endl;
-  }
+int Ships::getLength(){
+  return Ships::length;
+}
+
+void Ships::setLength(int passedLength){
+  Ships::length = passedLength;
+}
+
+bool Ships::getActive(){
+  return Ships::active;
+}
+
+void Ships::setActive(bool passedActive){
+  Ships::active = passedActive;
+}
+
+std::string Ships::getDirection(){
+  return Ships::direction;
+}
+
+void Ships::setDirection(std::string passedDirection){
+  Ships::direction = direction;
+}
+
+int Ships::getHealth(){
+  return Ships::health;
+}
+
+void Ships::setHealth(int passedHealth){
+  Ships::health = passedHealth;
 }
