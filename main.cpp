@@ -73,11 +73,17 @@ void gamemodeSetup(int mode, mINI::INIStructure setup){
 int main() {
   std::cout << "Starting up...\n\n";
   mINI::INIStructure setup = readIni();
-  board b(setup);
+  board b1(setup);
+  board b2(setup);
+  std::vector<std::vector<int>> b1Board = b1.createBoardMap(setup);
+  std::vector<std::vector<int>> b2Board = b2.createBoardMap(setup);
   int mode = menu();
   gamemodeSetup(mode, setup);
-  b.boardDraw(setup);
+  b1.boardDraw(setup);
   std::cout << std::endl;
+  b2.boardDraw(setup);
+  std::cout << std::endl;
+  b1Board = b1.addShipsToBoard(b1Board, allShipList);
 
   for (int i = 0; i < allShipList.size(); i++){
     for (int x = 0; x < allShipList[i].size(); x++){
