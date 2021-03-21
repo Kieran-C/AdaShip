@@ -6,12 +6,15 @@
 #include "libarys/ini.h"
 #include <vector>
 #include "Ships.h"
+#include <iomanip>
 #include "helpers.h"
 
 std::vector<Player> playerList;
 std::vector<std::vector<Ships>> allShipList;
 std::vector<std::string> shipTypes {"carrier", "battleship", "destroyer", "submarine", "patrolBoat"};
-// std::vector<std::string> alphabet {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+// std::vector<std::string> alpha {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+
+std::vector<char> alpha {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
 std::vector<Ships> createShips(int numOfShips, bool mines, mINI::INIStructure setup){
   std::vector<Ships> shipList;
@@ -26,7 +29,14 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
     std::cout << std::endl << "Please choose starting coordinate for your " << ships[i].getType() << " (length: " << ships[i].getLength() << "): ";
     std::string coord;
     std::cin >> coord;
-    std::cout << "------" << coord[0] << "-----";
+    int yCoord = coord[1] - '0';
+    int xCoord;
+    auto it = std::find(alpha.begin(), alpha.end(), coord[0]);
+      if (it != alpha.end()){
+        int xIndex = it - alpha.begin();
+        xCoord = xIndex + 1;
+      }
+    std::cout << std::endl << "X: " << xCoord << " Y: " << yCoord << std::endl;
     std::cout << std::endl << "Please choose a direction for your " << ships[i].getType() << "(Left, Right or Down): ";
     std::string dir;
     std::cin >> dir;
