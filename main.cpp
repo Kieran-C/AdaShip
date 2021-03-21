@@ -8,15 +8,24 @@
 #include "Ships.h"
 
 std::vector<Player> playerList;
+std::vector<std::vector<Ships>> allShipList;
 std::vector<std::string> shipTypes {"carrier", "battleship", "destroyer", "submarine", "patrolBoat"};
+
+std::vector<Ships> createShips(int numOfShips, bool mines, mINI::INIStructure setup){
+  std::vector<Ships> shipList;
+  for (int i = 0; i < numOfShips; i++){
+    shipList.push_back(Ships (shipTypes[i], "up", setup));
+  }
+  return shipList;
+}
 
 void gamemodeSetup(int mode, mINI::INIStructure setup){
   switch(mode){
     case 1: {
       playerList.push_back(Player (1, 1, 1, setup["ships"].size(), 0));
       playerList.push_back(Player (2, 2, 1, setup["ships"].size(), 0));
-      std::cout << std::endl << "Player ID: " << playerList[0].getPlayerId() << std::endl;
-      std::cout << std::endl << "Player ID: " << playerList[1].getPlayerId() << std::endl;
+      allShipList.push_back(createShips(setup["ships"].size(), false, setup));
+      allShipList.push_back(createShips(setup["ships"].size(), false, setup));
       break;
     }
     case 2:{
@@ -68,6 +77,11 @@ int main() {
   int mode = menu();
   gamemodeSetup(mode, setup);
   b.boardDraw(setup);
-  // shipCreation(playerList.size(), shipTypes);
-  // shipCreation(playerList.size(), shipTypes);
+  std::cout << std::endl;
+
+  for (int i = 0; i < allShipList.size(); i++){
+    for (int x = 0; x < allShipList[i].size(); x++){
+      std::cout << "Player " << i <<" length: " << allShipList[i][x].getLength() << std::endl;
+    }
+  }
 }
