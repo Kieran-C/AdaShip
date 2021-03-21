@@ -7,10 +7,19 @@
 // std::vector<ships> shipList;  
 
 Ships::Ships(std::string type, std::string passedDirection, mINI::INIStructure setup){
+  shipType = type;
   length = std::stoi(setup["ships"][type]);
   active = true;
   direction = passedDirection;
   health = std::stoi(setup["ships"][type]);
+}
+
+std::string Ships::getType(){
+  return Ships::shipType;
+}
+
+void Ships::setType(std::string type){
+  Ships::shipType = type;
 }
 
 int Ships::getLength(){

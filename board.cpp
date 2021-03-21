@@ -4,7 +4,6 @@
 #include <iomanip>
 #include <vector>
 #include "board.h"
-#include "Ships.h"
 
 board::board(mINI::INIStructure setup){
   width = stoi(setup["board"]["x"]);
@@ -83,6 +82,6 @@ std::vector<std::vector<int>> board::createBoardMap(mINI::INIStructure setup){
   return boardLayout;
 }
 
-std::vector<std::vector<int>> board::addShipsToBoard( std::vector<std::vector<Ships>> allShipList, std::vector<std::vector<int>> boardLayout){
-  return boardLayout;
-}
+// std::vector<std::vector<int>> board::addShipsToBoard( std::vector<std::vector<Ships>> allShipList, std::vector<std::vector<int>> boardLayout){
+//   return boardLayout;
+// }

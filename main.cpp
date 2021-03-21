@@ -6,17 +6,35 @@
 #include "libarys/ini.h"
 #include <vector>
 #include "Ships.h"
+#include "helpers.h"
 
 std::vector<Player> playerList;
 std::vector<std::vector<Ships>> allShipList;
 std::vector<std::string> shipTypes {"carrier", "battleship", "destroyer", "submarine", "patrolBoat"};
+// std::vector<std::string> alphabet {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
 
 std::vector<Ships> createShips(int numOfShips, bool mines, mINI::INIStructure setup){
   std::vector<Ships> shipList;
   for (int i = 0; i < numOfShips; i++){
-    shipList.push_back(Ships (shipTypes[i], "up", setup));
+    shipList.push_back(Ships (shipTypes[i], "down", setup));
   }
   return shipList;
+}
+
+std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, std::vector<Ships> ships){
+  for (int i = 0; i <= ships.size(); i++){
+    std::cout << std::endl << "Please choose starting coordinate for your " << ships[i].getType() << " (length: " << ships[i].getLength() << "): ";
+    std::string coord;
+    std::cin >> coord;
+    std::cout << "------" << coord[0] << "-----";
+    std::cout << std::endl << "Please choose a direction for your " << ships[i].getType() << "(Left, Right or Down): ";
+    std::string dir;
+    std::cin >> dir;
+    if (ships[i].getDirection() == "down"){
+      
+    }
+  }
+  return board;
 }
 
 void gamemodeSetup(int mode, mINI::INIStructure setup){
@@ -83,7 +101,8 @@ int main() {
   std::cout << std::endl;
   b2.boardDraw(setup);
   std::cout << std::endl;
-  b1Board = b1.addShipsToBoard(b1Board, allShipList);
+  b1Board = placeShips(b1Board, allShipList[0]);
+  // b1Board = b1.addShipsToBoard(b1Board, allShipList);
 
   for (int i = 0; i < allShipList.size(); i++){
     for (int x = 0; x < allShipList[i].size(); x++){
