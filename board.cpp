@@ -3,8 +3,14 @@
 #include <string>
 #include <iomanip>
 #include <vector>
+#include "board.h"
 
-int boardDraw(mINI::INIStructure setup){
+board::board(mINI::INIStructure setup){
+  width = stoi(setup["board"]["x"]);
+  height = stoi(setup["board"]["y"]);
+}
+
+int boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> boardLayout){
   int maxX = 0;
   for (int y = 0; y < stoi(setup["board"]["y"]); y++){
     for (int i = 0; i < (stoi(setup["board"]["x"])+1); i++){
@@ -42,16 +48,23 @@ std::vector<std::vector<int>> createBoardMap(mINI::INIStructure setup){
     row.clear();
   }
 
-  for (int i = 0; i < boardLayout.size(); i++){
-    for (int x = 0; x < boardLayout[0].size(); x++){
-      std::cout << boardLayout[i][x] << " ";
-    }
-    std::cout << std::endl;
-  }
+  // for (int i = 0; i < boardLayout.size(); i++){
+  //   for (int x = 0; x < boardLayout[0].size(); x++){
+  //     std::cout << boardLayout[i][x] << " ";
+  //   }
+  //   std::cout << std::endl;
+  // }
 
   return boardLayout;
 }
 
+std::vector<std::vector<int>> addShipsToBoard(std::vector<std::vector<int>> boardLayout){
+  std::vector<std::vector<int>> boardMap;
+  
+  return boardMap;
+}
+
 void boardSetup(mINI::INIStructure setup) {
-  boardDraw(setup);
+  std::vector<std::vector<int>> boardLayout = createBoardMap(setup);
+  boardDraw(setup, boardLayout);
 }
