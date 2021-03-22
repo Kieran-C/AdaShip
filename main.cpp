@@ -25,43 +25,78 @@ std::vector<Ships> createShips(int numOfShips, bool mines, mINI::INIStructure se
 
 std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, std::vector<Ships> ships){
   for (int i = 0; i <= ships.size(); i++){
-    bool coordSelect = true;
-    while (coordSelect){
-      std::cout << std::endl << "Please choose starting coordinate for your " << ships[i].getType() << " (length: " << ships[i].getLength() << "): ";
-      std::string coord;
-      std::cin >> coord;
-      std::string strYCoord = ""; 
-      for (int i = 1; i <= coord.size(); i++){
-        strYCoord = strYCoord + coord[i];
-      }
-      int yCoord = stoi(strYCoord);
+    bool shipInvalid = true;
+    while(shipInvalid){
+      bool coordSelect = true;
+      int yCoord;
       int xCoord;
-      auto it = std::find(alpha.begin(), alpha.end(), coord[0]);
-        if (it != alpha.end()){
-          int xIndex = it - alpha.begin();
-          xCoord = xIndex + 1;
+      int coordValidCheck = 0;
+      std::vector<int> yCoords;
+      std::vector<int> xCoords;
+      while (coordSelect){
+        std::cout << std::endl << "Please choose starting coordinate for your " << ships[i].getType() << " (length: " << ships[i].getLength() << "): ";
+        std::string coord;
+        std::cin >> coord;
+        std::string strYCoord = ""; 
+        for (int i = 1; i <= coord.size(); i++){
+          strYCoord = strYCoord + coord[i];
         }
-      if (((xCoord > 0) && (xCoord <= board[0].size()) ) && ((yCoord > 0) && (yCoord <= board.size()))){
-        coordSelect = false;
+        yCoord = stoi(strYCoord);
+        yCoord--;
+        auto it = std::find(alpha.begin(), alpha.end(), coord[0]);
+          if (it != alpha.end()){
+            int xIndex = it - alpha.begin();
+            xCoord = xIndex + 1;
+            xCoord--;
+          }
+        if (((xCoord >= 0) && (xCoord <= board[0].size()) ) && ((yCoord >= 0) && (yCoord <= board.size()))){
+          coordSelect = false;
+        }
+        std::cout << std::endl << "X: " << xCoord << " Y: " << yCoord << std::endl;
       }
-      std::cout << std::endl << "X: " << xCoord << " Y: " << yCoord << std::endl;
+      
+      bool validCoords = false;
+      bool dirSelect = true;
+      while (dirSelect){
+        xCoords.clear();
+        yCoords.clear();
+        std::cout << std::endl << "Please choose a direction for your " << ships[i].getType() << "(Left, Right or Down): ";
+        std::string dir;
+        std::cin >> dir;
+        if (dir == "down"){
+          for (int x = 0; x < ships[i].getLength(); x++){
+            yCoords.push_back(yCoord + x);
+            xCoords.push_back(xCoord);
+          }
+          dirSelect = false;
+        }else if(dir == "left"){
+          for (int x = 0; x < ships[i].getLength(); x++){
+            xCoords.push_back(xCoord - x);
+            yCoords.push_back(yCoord);
+          }
+          dirSelect = false;
+        }else if(dir == "right"){
+          for (int x = 0; x < ships[i].getLength(); x++){
+            xCoords.push_back(xCoord + x);
+            yCoords.push_back(yCoord);
+          }
+          dirSelect = false;
+        }else{std::cout << "Invalid direction";}
+      }
+      for (int x = 0; x < xCoords.size(); x++){
+        if ((board[yCoords[x]][xCoords[x]] == 0) && (yCoords[x] >= 0) && (xCoords[x] >= 0) && (yCoords[x] < board.size()) && (xCoords[x] < board[0].size())){
+          coordValidCheck += 1;
+        }
+      }
+      if (coordValidCheck == ships[i].getLength()){
+        for (int x = 0; x < yCoords.size(); x++){
+          auto it = board[yCoords[x]].begin() + xCoords[x];
+          board[yCoords[x]].insert(it, 1);
+        }
+        shipInvalid = false;
+      }
     }
-    
-
-    bool dirSelect = true;
-    while (dirSelect){
-      std::cout << std::endl << "Please choose a direction for your " << ships[i].getType() << "(Left, Right or Down): ";
-      std::string dir;
-      std::cin >> dir;
-      if (dir == "down"){
-        dirSelect = false;
-      }else if(dir == "left"){
-        dirSelect = false;
-      }else if(dir == "right"){
-        dirSelect = false;
-      }else{std::cout << "Invalid direction";}
-    }
-    
+    std::cout << std::endl << i << " - " << ships.size();
   }
   return board;
 }
@@ -131,7 +166,7 @@ int main() {
   b2.boardDraw(setup, b2Board);
   std::cout << std::endl;
   b1Board = placeShips(b1Board, allShipList[0]);
-  // b1Board = b1.addShipsToBoard(b1Board, allShipList);
+  b1.boardDraw(setup, b1Board);
 
   for (int i = 0; i < allShipList.size(); i++){
     for (int x = 0; x < allShipList[i].size(); x++){

@@ -75,8 +75,10 @@ std::vector<std::vector<int>> board::createBoardMap(mINI::INIStructure setup){
     row.clear();
   }
 
-  auto it = boardLayout[0].begin() + 4;
-  boardLayout[0].insert(it, 1);
+  auto it = boardLayout[1].begin();
+  // auto it2 = boardLayout.begin();
+  // row
+  boardLayout[1].insert(it, 1);
 
   // for (int i = 0; i < boardLayout.size(); i++){
   //   for (int x = 0; x < boardLayout[0].size(); x++){
