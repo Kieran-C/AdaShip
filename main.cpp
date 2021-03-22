@@ -198,8 +198,11 @@ int main() {
   int mode = mainMenu();
   gamemodeSetup(mode, setup, b1, b2);
   b1Board = placeShips(b1Board, allShipList[0], false);
+  b2Board = placeShips(b2Board, allShipList[1], true);
   b1.boardDraw(setup, b1Board);
+  // b2.boardDraw(setup, b2Board);
   shipOverview("Player 1", allShipList[0]);
+  // shipOverview("Player 2", allShipList[1]);
   while (!continueGame){
     int subMenuDecision = confirmationMenu();
     if (subMenuDecision == 1){
