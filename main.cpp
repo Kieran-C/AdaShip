@@ -60,22 +60,16 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
       while (dirSelect){
         xCoords.clear();
         yCoords.clear();
-        std::cout << std::endl << "Please choose a direction for your " << ships[i].getType() << "(Left, Right or Down): ";
+        std::cout << std::endl << "Please choose an orientation for your " << ships[i].getType() << "(horizontal or vertical): ";
         std::string dir;
         std::cin >> dir;
-        if (dir == "down"){
+        if (dir == "vertical"){
           for (int x = 0; x < ships[i].getLength(); x++){
             yCoords.push_back(yCoord + x);
             xCoords.push_back(xCoord);
           }
           dirSelect = false;
-        }else if(dir == "left"){
-          for (int x = 0; x < ships[i].getLength(); x++){
-            xCoords.push_back(xCoord - x);
-            yCoords.push_back(yCoord);
-          }
-          dirSelect = false;
-        }else if(dir == "right"){
+        }else if(dir == "horizontal"){
           for (int x = 0; x < ships[i].getLength(); x++){
             xCoords.push_back(xCoord + x);
             yCoords.push_back(yCoord);

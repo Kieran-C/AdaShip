@@ -41,7 +41,6 @@ int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> boa
       }
       if (y != 0){
         if (i == 0){
-          // std::cout << std::setw(5)<< std::left << y;
           std::cout << "|";
         }else{
           if (board[y-1][i-1] != 0){
@@ -74,22 +73,5 @@ std::vector<std::vector<int>> board::createBoardMap(mINI::INIStructure setup){
     boardLayout.push_back(row);
     row.clear();
   }
-
-  auto it = boardLayout[1].begin();
-  // auto it2 = boardLayout.begin();
-  // row
-  boardLayout[1].insert(it, 1);
-
-  // for (int i = 0; i < boardLayout.size(); i++){
-  //   for (int x = 0; x < boardLayout[0].size(); x++){
-  //     std::cout << boardLayout[i][x] << " ";
-  //   }
-  //   std::cout << std::endl;
-  // }
-
   return boardLayout;
 }
-
-// std::vector<std::vector<int>> board::addShipsToBoard( std::vector<std::vector<Ships>> allShipList, std::vector<std::vector<int>> boardLayout){
-//   return boardLayout;
-// }
