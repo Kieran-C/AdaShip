@@ -26,23 +26,44 @@ std::vector<Ships> createShips(int numOfShips, bool mines, mINI::INIStructure se
 
 std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, std::vector<Ships> ships){
   for (int i = 0; i <= ships.size(); i++){
-    std::cout << std::endl << "Please choose starting coordinate for your " << ships[i].getType() << " (length: " << ships[i].getLength() << "): ";
-    std::string coord;
-    std::cin >> coord;
-    int yCoord = coord[1] - '0';
-    int xCoord;
-    auto it = std::find(alpha.begin(), alpha.end(), coord[0]);
-      if (it != alpha.end()){
-        int xIndex = it - alpha.begin();
-        xCoord = xIndex + 1;
+    bool coordSelect = true;
+    while (coordSelect){
+      std::cout << std::endl << "Please choose starting coordinate for your " << ships[i].getType() << " (length: " << ships[i].getLength() << "): ";
+      std::string coord;
+      std::cin >> coord;
+      std::string strYCoord = ""; 
+      for (int i = 1; i <= coord.size(); i++){
+        strYCoord = strYCoord + coord[i];
       }
-    std::cout << std::endl << "X: " << xCoord << " Y: " << yCoord << std::endl;
-    std::cout << std::endl << "Please choose a direction for your " << ships[i].getType() << "(Left, Right or Down): ";
-    std::string dir;
-    std::cin >> dir;
-    if (ships[i].getDirection() == "down"){
-      
+      // int yCoord = coord[1] - '0';
+      int yCoord = stoi(strYCoord);
+      int xCoord;
+      auto it = std::find(alpha.begin(), alpha.end(), coord[0]);
+        if (it != alpha.end()){
+          int xIndex = it - alpha.begin();
+          xCoord = xIndex + 1;
+        }
+      if (((xCoord > 0) && (xCoord <= board[0].size()) ) && ((yCoord > 0) && (yCoord <= board.size()))){
+        coordSelect = false;
+      }
+      std::cout << std::endl << "X: " << xCoord << " Y: " << yCoord << std::endl;
     }
+    
+
+    bool dirSelect = true;
+    while (dirSelect){
+      std::cout << std::endl << "Please choose a direction for your " << ships[i].getType() << "(Left, Right or Down): ";
+      std::string dir;
+      std::cin >> dir;
+      if (dir == "down"){
+        dirSelect = false;
+      }else if(dir == "left"){
+        dirSelect = false;
+      }else if(dir == "right"){
+        dirSelect = false;
+      }else{std::cout << "Invalid direction";}
+    }
+    
   }
   return board;
 }
