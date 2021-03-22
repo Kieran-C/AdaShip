@@ -23,7 +23,13 @@ std::vector<Ships> createShips(int numOfShips, bool mines, mINI::INIStructure se
   return shipList;
 }
 
-std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, std::vector<Ships> ships){
+std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, std::vector<Ships> ships, bool ai){
+  std::string autoPlace;
+  std::cout << std::endl << "Do you want to auto place ships? (y/n): ";
+  std::cin >> autoPlace;
+  if (autoPlace == "y"){
+    ai = true;
+  }
   for (int i = 0; i < ships.size(); ++i){
     bool shipInvalid = true;
     while(shipInvalid){
@@ -34,21 +40,27 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
       std::vector<int> yCoords;
       std::vector<int> xCoords;
       while (coordSelect){
-        std::cout << std::endl << "Please choose starting coordinate for your " << ships[i].getType() << " (length: " << ships[i].getLength() << "): ";
-        std::string coord;
-        std::cin >> coord;
-        std::string strYCoord = ""; 
-        for (int i = 1; i <= coord.size(); i++){
-          strYCoord = strYCoord + coord[i];
-        }
-        yCoord = stoi(strYCoord);
-        yCoord--;
-        auto it = std::find(alpha.begin(), alpha.end(), coord[0]);
+        if (!ai){
+          std::cout << std::endl << "Please choose starting coordinate for your " << ships[i].getType() << " (length: " << ships[i].getLength() << "): ";
+          std::string coord;
+          std::cin >> coord;
+          std::string strYCoord = ""; 
+          for (int i = 1; i <= coord.size(); i++){
+            strYCoord = strYCoord + coord[i];
+          }
+          yCoord = stoi(strYCoord);
+          yCoord--;
+          auto it = std::find(alpha.begin(), alpha.end(), coord[0]);
           if (it != alpha.end()){
             int xIndex = it - alpha.begin();
             xCoord = xIndex + 1;
             xCoord--;
           }
+        }else{
+          xCoord = (helpers::generateNumber(board[0].size()));
+          yCoord = (helpers::generateNumber(board.size()));
+          std::cout << std::endl <<"NUMBERS GEN";
+        }
         if (((xCoord >= 0) && (xCoord <= board[0].size()) ) && ((yCoord >= 0) && (yCoord <= board.size()))){
           coordSelect = false;
         }
@@ -58,11 +70,21 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
       bool validCoords = false;
       bool dirSelect = true;
       while (dirSelect){
+        std::string dir;
         xCoords.clear();
         yCoords.clear();
-        std::cout << std::endl << "Please choose an orientation for your " << ships[i].getType() << "(horizontal or vertical): ";
-        std::string dir;
-        std::cin >> dir;
+        if (!ai){
+          std::cout << std::endl << "Please choose an orientation for your " << ships[i].getType() << "(horizontal or vertical): ";
+          std::cin >> dir;
+        }else{
+          int ori = helpers::generateNumber(2);
+          if (ori == 1){
+            dir = "vertical";
+          }else {
+            dir = "horizontal";
+          }
+          std::cout << std::endl << "ORI GEN";
+        }
         if (dir == "vertical"){
           for (int x = 0; x < ships[i].getLength(); x++){
             yCoords.push_back(yCoord + x);
@@ -158,7 +180,7 @@ int main() {
   std::cout << std::endl;
   b2.boardDraw(setup, b2Board);
   std::cout << std::endl;
-  b1Board = placeShips(b1Board, allShipList[0]);
+  b1Board = placeShips(b1Board, allShipList[0], false);
   b1.boardDraw(setup, b1Board);
 
   // for (int i = 0; i < allShipList.size(); i++){

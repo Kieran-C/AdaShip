@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctime>
+#include <random>
+#include "helpers.h"
 
-int generateNumber(int maxValue){
-    srand((unsigned) time(0));
-    int result = 1 + (rand() % maxValue);
-    return result;
+int helpers::generateNumber(int maxValue){
+    std::random_device rdev;
+    std::mt19937 rgen(rdev());
+    std::uniform_int_distribution<int> idist(1, maxValue); //(inclusive, inclusive)
+    return idist(rgen);
 }

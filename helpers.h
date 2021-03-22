@@ -1,1 +1,6 @@
-int generateNumber(int maxValue);
+#include <random>
+
+class helpers{
+  public:
+    static int generateNumber(int maxValue);
+};
