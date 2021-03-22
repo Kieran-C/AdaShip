@@ -5,7 +5,6 @@
 #include "Player.h"
 #include "libarys/ini.h"
 #include <vector>
-#include "Ships.h"
 #include <iomanip>
 #include "helpers.h"
 
@@ -23,12 +22,14 @@ std::vector<Ships> createShips(int numOfShips, bool mines, mINI::INIStructure se
   return shipList;
 }
 
-std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, std::vector<Ships> ships, bool ai){
+std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, std::vector<Ships>& ships, bool ai){
   std::string autoPlace;
-  std::cout << std::endl << "Do you want to auto place ships? (y/n): ";
-  std::cin >> autoPlace;
-  if (autoPlace == "y"){
-    ai = true;
+  if (!ai){
+    std::cout << std::endl << "Do you want to auto-place your ships? (y/n): ";
+    std::cin >> autoPlace;
+    if (autoPlace == "y"){
+      ai = true;
+    }
   }
   for (int i = 0; i < ships.size(); ++i){
     bool shipInvalid = true;
@@ -109,8 +110,8 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
       }
       if (coordValidCheck == ships[i].getLength()){
         for (int x = 0; x < yCoords.size(); x++){
-          auto it = board[yCoords[x]].begin() + xCoords[x];
           board[yCoords[x]][xCoords[x]] = 1;
+          ships[i].setPlaced(true);
         }
         shipInvalid = false;
       }
@@ -120,7 +121,7 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
   return board;
 }
 
-void gamemodeSetup(int mode, mINI::INIStructure setup){
+void gamemodeSetup(int mode, mINI::INIStructure setup, board board1, board board2){
   switch(mode){
     case 1: {
       playerList.push_back(Player (1, 1, 1, setup["ships"].size(), 0));
@@ -178,15 +179,18 @@ int main() {
   board b2(setup, "Player 2");
   std::vector<std::vector<int>> b1Board = b1.createBoardMap(setup);
   std::vector<std::vector<int>> b2Board = b2.createBoardMap(setup);
-  int mode = menu();
-  gamemodeSetup(mode, setup);
-  std::string name = "Player";
-  b1.boardDraw(setup, b1Board);
-  std::cout << std::endl;
-  b2.boardDraw(setup, b2Board);
-  std::cout << std::endl;
+  int mode = mainMenu();
+  gamemodeSetup(mode, setup, b1, b2);
+  // b1.boardDraw(setup, b1Board);
+  // std::cout << std::endl;
+  // b2.boardDraw(setup, b2Board);
+  // std::cout << std::endl;
   b1Board = placeShips(b1Board, allShipList[0], false);
   b1.boardDraw(setup, b1Board);
+  shipOverview("Player 1", allShipList[0]);
+  //  for (auto &y: allShipList[0]){
+  //    std::cout << std::endl << y.getType() << ": " << y.getPlaced();
+  //  }
 
   // for (int i = 0; i < allShipList.size(); i++){
   //   for (int x = 0; x < allShipList[i].size(); x++){

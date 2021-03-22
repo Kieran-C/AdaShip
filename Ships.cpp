@@ -8,10 +8,12 @@
 
 Ships::Ships(std::string type, std::string passedDirection, mINI::INIStructure setup){
   shipType = type;
+  shipTypeAbbreviation = type[0];
   length = std::stoi(setup["ships"][type]);
   active = true;
   direction = passedDirection;
   health = std::stoi(setup["ships"][type]);
+  placed = false;
 }
 
 std::string Ships::getType(){
@@ -52,4 +54,20 @@ int Ships::getHealth(){
 
 void Ships::setHealth(int passedHealth){
   Ships::health = passedHealth;
+}
+
+char Ships::getTypeAbbreviation(){
+  return Ships::shipTypeAbbreviation;
+}
+
+void Ships::setTypeAbbreviation(char typeAbb){
+  Ships::shipTypeAbbreviation = typeAbb;
+}
+
+bool Ships::getPlaced(){
+  return Ships::placed;
+}
+
+void Ships::setPlaced(bool passedPlaced){
+  Ships::placed = passedPlaced;
 }

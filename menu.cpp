@@ -2,10 +2,12 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include "menu.h"
+// #include "Ships.h"
 
 std::vector<std::string> modes{"One Player VS Computer", "Two Player Game", "One Player VS Computer (salvo)", "Two player game (salvo)", "One player v computer (hidden mines)", "Two player game (hidden mines)", "Computer v computer (hidden mines)", "Quit"}; 
 
-int menu(){
+int mainMenu(){
   std::cout << "BATTLESHIPS - Kieran Caruana";
   std::cout << "\n\nModes:\n\n";
   for(int i = 0; i < modes.size(); i++){
@@ -15,4 +17,18 @@ int menu(){
   int select;
   std::cin >> select;
   return select;
+}
+
+void shipOverview(std::string player, std::vector<Ships> ships){
+  std::cout << std::endl << std::endl << std::setfill('-') << std::left << std::setw(35) << "|----" + player + "'s Ships" << "|" << std::endl;
+  std::string placement;
+  for (auto &y: ships){
+    if (y.getPlaced() == 1){
+      placement = "Placed";
+    }else{placement = "Not Placed";}
+      std::cout << "|" << std::setfill(' ') << std::right << std::setw(35) << "|" << std::endl << "|" << std::setfill(' ') << std::left << std::setw(30) << y.getType() + ":" <<std::right << std::setw(5) <<"|"<<std::endl;
+     std::cout << std::left << std::setw(30) << "|Board Status: " + placement << std::right << std::setw(6) << "|" << std::endl;
+     std::cout << std::left << std::setw(30) << "|Health: " + std::to_string(y.getHealth()) << std::right << std::setw(6) << "|" << std::endl;
+   }
+  std::cout << std::setfill('-') << std::left << std::setw(35) << "|----" << "|" << std::endl; 
 }
