@@ -12,7 +12,6 @@
 std::vector<Player> playerList;
 std::vector<std::vector<Ships>> allShipList;
 std::vector<std::string> shipTypes {"carrier", "battleship", "destroyer", "submarine", "patrolBoat"};
-// std::vector<std::string> alpha {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
 
 std::vector<char> alpha {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
@@ -35,7 +34,6 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
       for (int i = 1; i <= coord.size(); i++){
         strYCoord = strYCoord + coord[i];
       }
-      // int yCoord = coord[1] - '0';
       int yCoord = stoi(strYCoord);
       int xCoord;
       auto it = std::find(alpha.begin(), alpha.end(), coord[0]);
@@ -128,9 +126,9 @@ int main() {
   std::vector<std::vector<int>> b2Board = b2.createBoardMap(setup);
   int mode = menu();
   gamemodeSetup(mode, setup);
-  b1.boardDraw(setup);
+  b1.boardDraw(setup, b1Board);
   std::cout << std::endl;
-  b2.boardDraw(setup);
+  b2.boardDraw(setup, b2Board);
   std::cout << std::endl;
   b1Board = placeShips(b1Board, allShipList[0]);
   // b1Board = b1.addShipsToBoard(b1Board, allShipList);

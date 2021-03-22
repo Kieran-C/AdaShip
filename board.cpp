@@ -28,7 +28,7 @@ void board::setHeight(int passedHeight){
   board::height = passedHeight;
 }
 
-int board::boardDraw(mINI::INIStructure setup){
+int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> board){
   int maxX = 0;
   for (int y = 0; y <= stoi(setup["board"]["y"]); y++){
     for (int i = 0; i < (stoi(setup["board"]["x"])+1); i++){
@@ -44,7 +44,10 @@ int board::boardDraw(mINI::INIStructure setup){
           // std::cout << std::setw(5)<< std::left << y;
           std::cout << "|";
         }else{
-          std::cout <<std::setw(5) << "|";
+          if (board[y-1][i-1] != 0){
+            std::cout <<std::setw(4)<< board[y-1][i-1] << "|";
+          }else{std::cout <<std::setw(5)<< "|";}
+          
         }
       }
     }
@@ -71,6 +74,9 @@ std::vector<std::vector<int>> board::createBoardMap(mINI::INIStructure setup){
     boardLayout.push_back(row);
     row.clear();
   }
+
+  auto it = boardLayout[0].begin() + 4;
+  boardLayout[0].insert(it, 1);
 
   // for (int i = 0; i < boardLayout.size(); i++){
   //   for (int x = 0; x < boardLayout[0].size(); x++){
