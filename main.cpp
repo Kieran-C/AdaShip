@@ -24,7 +24,7 @@ std::vector<Ships> createShips(int numOfShips, bool mines, mINI::INIStructure se
 }
 
 std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, std::vector<Ships> ships){
-  for (int i = 0; i <= ships.size(); i++){
+  for (int i = 0; i < ships.size(); ++i){
     bool shipInvalid = true;
     while(shipInvalid){
       bool coordSelect = true;
@@ -96,7 +96,6 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
         shipInvalid = false;
       }
     }
-    std::cout << std::endl << i << " - " << ships.size();
   }
   return board;
 }
@@ -168,9 +167,9 @@ int main() {
   b1Board = placeShips(b1Board, allShipList[0]);
   b1.boardDraw(setup, b1Board);
 
-  for (int i = 0; i < allShipList.size(); i++){
-    for (int x = 0; x < allShipList[i].size(); x++){
-      std::cout << "Player " << i <<" length: " << allShipList[i][x].getLength() << std::endl;
-    }
-  }
+  // for (int i = 0; i < allShipList.size(); i++){
+  //   for (int x = 0; x < allShipList[i].size(); x++){
+  //     std::cout << "Player " << i <<" length: " << allShipList[i][x].getLength() << std::endl;
+  //   }
+  // }
 }
