@@ -73,7 +73,7 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
         std::string dir;
         xCoords.clear();
         yCoords.clear();
-        if ((!ai)||(ai)){
+        if (!ai){
           std::cout << std::endl << "Please choose an orientation for your " << ships[i].getType() << "(horizontal or vertical): ";
           std::cin >> dir;
         }else{
@@ -88,7 +88,7 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
         if (dir == "vertical"){
           yCoords.clear();
           xCoords.clear();
-          for (int x = 0; x < ships[i].getLength(); x++){
+          for (int x = 0; x < ships.at(i).getLength(); x++){
             yCoords.push_back(yCoord + x);
             std::cout << std::endl << "PUSHBACK EXECUTED FOR VERTICAL Y - " << yCoords[x];
             xCoords.push_back(xCoord);
@@ -105,9 +105,12 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
         }else{std::cout << "Invalid direction";}
       }
       for (int x = 0; x < xCoords.size(); x++){
-        if ((board[yCoords[x]][xCoords[x]] == 0) && (yCoords[x] >= 0) && (xCoords[x] >= 0) && (yCoords[x] < board.size()-1) && (xCoords[x] < board[0].size())){
-          coordValidCheck += 1;
-          std::cout << "VAILD POINT ADDED";
+        std::cout << std::endl << "VALID POINT ADDER: y: " << yCoords[x] << " X: " << xCoords[x] << " Board: " << board.size(); 
+        if ((yCoords[x] >= 0) && (xCoords[x] >= 0) && (yCoords[x] <= board.size()-1) && (xCoords[x] < board[0].size())){
+          if (board[yCoords[x]][xCoords[x]] == 0){
+            coordValidCheck += 1;
+            std::cout << "VAILD POINT ADDED";
+          }
         }else {
           std::cout << std::endl << "[ERROR] X: " << xCoords[x] << " Y: " << yCoords[x] << " are not valid coordinates";
         }
@@ -116,12 +119,13 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
         std::cout << std::endl << "ENTERED COORD VALID CHECK";
         for (int x = 0; x < yCoords.size(); x++){
           auto it = board[yCoords[x]].begin() + xCoords[x];
-          board[yCoords[x]].insert(it, 1);
+          board[yCoords[x]][xCoords[x]] = 1;
         }
         shipInvalid = false;
       }
     }
   }
+  std::cout << std::endl << std::endl;
   return board;
 }
 

@@ -59,6 +59,14 @@ int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> boa
     std::cout << "|----";
   }
   std::cout << "|";
+
+  std::cout << std::endl << std::endl;
+  for (auto &y: board){
+    for (auto &x: y){
+      std::cout << x;
+    }
+    std::cout << std::endl;
+  }
   return 1;
 }
 
