@@ -112,6 +112,8 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
         for (int x = 0; x < yCoords.size(); x++){
           board[yCoords[x]][xCoords[x]] = 1;
           ships[i].setPlaced(true);
+          ships[i].appendNewCoordinate('x', xCoords[x]);
+          ships[i].appendNewCoordinate('y', yCoords[x]);
         }
         shipInvalid = false;
       }
@@ -172,7 +174,21 @@ void gamemodeSetup(int mode, mINI::INIStructure setup, board board1, board board
   }
 }
 
+std::vector<std::vector<int>> resetBoard(std::vector<std::vector<int>> passedBoard, board& b, mINI::INIStructure setup, std::vector<Ships>& ships){
+  for (auto &i: passedBoard){
+    i.clear();
+  }
+  passedBoard.clear();
+  for (auto &i: ships){
+    i.setPlaced(false);
+    i.clearXCoordinates();
+    i.clearYCoordinates();
+  }
+  return b.createBoardMap(setup);
+}
+
 int main() {
+  bool continueGame = false;
   std::cout << "Starting up...\n\n";
   mINI::INIStructure setup = readIni();
   board b1(setup, "Player 1");
@@ -181,20 +197,23 @@ int main() {
   std::vector<std::vector<int>> b2Board = b2.createBoardMap(setup);
   int mode = mainMenu();
   gamemodeSetup(mode, setup, b1, b2);
-  // b1.boardDraw(setup, b1Board);
-  // std::cout << std::endl;
-  // b2.boardDraw(setup, b2Board);
-  // std::cout << std::endl;
   b1Board = placeShips(b1Board, allShipList[0], false);
   b1.boardDraw(setup, b1Board);
   shipOverview("Player 1", allShipList[0]);
-  //  for (auto &y: allShipList[0]){
-  //    std::cout << std::endl << y.getType() << ": " << y.getPlaced();
-  //  }
-
-  // for (int i = 0; i < allShipList.size(); i++){
-  //   for (int x = 0; x < allShipList[i].size(); x++){
-  //     std::cout << "Player " << i <<" length: " << allShipList[i][x].getLength() << std::endl;
-  //   }
-  // }
+  while (!continueGame){
+    int subMenuDecision = confirmationMenu();
+    if (subMenuDecision == 1){
+      continueGame = true;
+    }else if (subMenuDecision == 2){
+      b1Board = resetBoard(b1Board , b1, setup, allShipList[0]);
+      b1.boardDraw(setup, b1Board);
+      shipOverview("Player 1", allShipList[0]);
+    }else if (subMenuDecision == 3){
+      continueGame = true;
+      exit(0);
+    }else{
+      std::cout << std::endl << "---- INVALID CHOICE ---";
+    }
+  }
+  
 }

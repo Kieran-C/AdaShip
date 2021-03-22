@@ -2,9 +2,7 @@
 #include "libarys/ini.h"
 #include <iomanip>
 #include <vector>
-#include <iostream>
-
-// std::vector<ships> shipList;  
+#include <iostream> 
 
 Ships::Ships(std::string type, std::string passedDirection, mINI::INIStructure setup){
   shipType = type;
@@ -14,6 +12,8 @@ Ships::Ships(std::string type, std::string passedDirection, mINI::INIStructure s
   direction = passedDirection;
   health = std::stoi(setup["ships"][type]);
   placed = false;
+  shipXCoordinates;
+  shipYCoordinates;
 }
 
 std::string Ships::getType(){
@@ -70,4 +70,36 @@ bool Ships::getPlaced(){
 
 void Ships::setPlaced(bool passedPlaced){
   Ships::placed = passedPlaced;
+}
+
+std::vector<int> Ships::getXCoordinates(){
+  return Ships::shipXCoordinates;
+}
+
+void Ships::setXCoordinates(std::vector<int> shipXCoords){
+  Ships::shipXCoordinates = shipXCoords;
+}
+
+std::vector<int> Ships::getYCoordinates(){
+  return Ships::shipYCoordinates;
+}
+
+void Ships::setYCoordinates(std::vector<int> shipYCoords){
+  Ships::shipYCoordinates = shipYCoordinates;
+}
+
+void Ships::appendNewCoordinate(char axis, int coord){
+  if (axis == 'x'){
+    Ships::shipXCoordinates.push_back(coord);
+  }else if (axis == 'y'){
+    Ships::shipYCoordinates.push_back(coord);
+  }
+}
+
+void Ships::clearXCoordinates(){
+  Ships::shipXCoordinates.clear();
+}
+
+void Ships::clearYCoordinates(){
+  Ships::shipYCoordinates.clear();
 }

@@ -32,3 +32,14 @@ void shipOverview(std::string player, std::vector<Ships> ships){
    }
   std::cout << std::setfill('-') << std::left << std::setw(35) << "|----" << "|" << std::endl; 
 }
+
+int confirmationMenu(){
+  int selection;
+  std::cout << std::endl << "Please select an option to continue: " << std::endl;
+  std::cout << "1 - Continue to game" << std::endl;
+  std::cout << "2 - Reset Board" << std::endl;
+  std::cout << "3 - Quit" << std::endl;
+  std::cout << "Please choose option 1, 2 or 3: ";
+  std::cin >> selection;
+  return selection;
+}

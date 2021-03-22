@@ -63,7 +63,7 @@ int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> boa
     std::cout << "|----";
   }
   std::cout << "|";
-  //------- PRINTS GRID AS TEXT --------------
+  // ------- PRINTS GRID AS TEXT --------------
   // std::cout << std::endl << std::endl;
   // for (auto &y: board){
   //   for (auto &x: y){

@@ -11,6 +11,8 @@ class Ships {
     std::string direction;
     int health;
     bool placed;
+    std::vector<int> shipXCoordinates;
+    std::vector<int> shipYCoordinates;
 
   public:
     Ships(std::string type, std::string passedDirection, mINI::INIStructure setup);
@@ -28,4 +30,11 @@ class Ships {
     char getTypeAbbreviation();
     void setPlaced(bool passedPlaced);
     bool getPlaced();
+    void setXCoordinates(std::vector<int> shipXCoords);
+    std::vector<int> getXCoordinates();
+    void setYCoordinates(std::vector<int> shipYCoords);
+    std::vector<int> getYCoordinates();
+    void appendNewCoordinate (char axis, int coord);
+    void clearXCoordinates();
+    void clearYCoordinates();
 };
