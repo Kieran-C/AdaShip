@@ -6,13 +6,14 @@ class board{
   private:
     int width;
     int height;
+    std::string name;
     
   public:
     int getWidth();
     void setWidth(int passedWidth);
     int getHeight();
     void setHeight(int passedHeight);
-    board(mINI::INIStructure setup);
+    board(mINI::INIStructure setup, std::string passedName);
     void boardSetup(mINI::INIStructure setup);
     int boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> board);
     std::vector<std::vector<int>> createBoardMap(mINI::INIStructure setup);

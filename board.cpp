@@ -5,9 +5,10 @@
 #include <vector>
 #include "board.h"
 
-board::board(mINI::INIStructure setup){
+board::board(mINI::INIStructure setup, std::string passedName){
   width = stoi(setup["board"]["x"]);
   height = stoi(setup["board"]["y"]);
+  name = passedName;
 }
 
 std::vector<std::string> alphabet {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
@@ -29,6 +30,9 @@ void board::setHeight(int passedHeight){
 }
 
 int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> board){
+  std::cout << std::endl << std::setfill('-') << std::setw((width*5)/2) << "-";
+  std::cout << board::name;
+  std::cout << std::setfill('-') << std::setw((width*5)/2) << "-" << std::endl << std::endl;
   int maxX = 0;
   for (int y = 0; y <= stoi(setup["board"]["y"]); y++){
     for (int i = 0; i < (stoi(setup["board"]["x"])+1); i++){
@@ -59,14 +63,14 @@ int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> boa
     std::cout << "|----";
   }
   std::cout << "|";
-
-  std::cout << std::endl << std::endl;
-  for (auto &y: board){
-    for (auto &x: y){
-      std::cout << x;
-    }
-    std::cout << std::endl;
-  }
+  //------- PRINTS GRID AS TEXT --------------
+  // std::cout << std::endl << std::endl;
+  // for (auto &y: board){
+  //   for (auto &x: y){
+  //     std::cout << x;
+  //   }
+  //   std::cout << std::endl;
+  // }
   return 1;
 }
 

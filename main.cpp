@@ -59,12 +59,10 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
         }else{
           xCoord = (helpers::generateNumber(board[0].size()));
           yCoord = (helpers::generateNumber(board.size()));
-          std::cout << std::endl <<"NUMBERS GEN";
         }
         if (((xCoord >= 0) && (xCoord <= board[0].size()) ) && ((yCoord >= 0) && (yCoord <= board.size()))){
           coordSelect = false;
         }
-        std::cout << std::endl << "X: " << xCoord << " Y: " << yCoord << std::endl;
       }
       
       bool validCoords = false;
@@ -83,40 +81,33 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
           }else {
             dir = "horizontal";
           }
-          std::cout << std::endl << "ORI GEN";
         }
         if (dir == "vertical"){
           yCoords.clear();
           xCoords.clear();
           for (int x = 0; x < ships.at(i).getLength(); x++){
             yCoords.push_back(yCoord + x);
-            std::cout << std::endl << "PUSHBACK EXECUTED FOR VERTICAL Y - " << yCoords[x];
             xCoords.push_back(xCoord);
-            std::cout << std::endl << "PUSHBACK EXECUTED FOR VERTICAL X - " << xCoords[x];
           }
           dirSelect = false;
         }else if(dir == "horizontal"){
           for (int x = 0; x < ships[i].getLength(); x++){
             xCoords.push_back(xCoord + x);
             yCoords.push_back(yCoord);
-            std::cout << std::endl << "PUSHBACK EXECUTED FOR HORIZONTAL";
           }
           dirSelect = false;
         }else{std::cout << "Invalid direction";}
       }
       for (int x = 0; x < xCoords.size(); x++){
-        std::cout << std::endl << "VALID POINT ADDER: y: " << yCoords[x] << " X: " << xCoords[x] << " Board: " << board.size(); 
         if ((yCoords[x] >= 0) && (xCoords[x] >= 0) && (yCoords[x] <= board.size()-1) && (xCoords[x] < board[0].size())){
           if (board[yCoords[x]][xCoords[x]] == 0){
             coordValidCheck += 1;
-            std::cout << "VAILD POINT ADDED";
           }
         }else {
-          std::cout << std::endl << "[ERROR] X: " << xCoords[x] << " Y: " << yCoords[x] << " are not valid coordinates";
+          // std::cout << std::endl << "[ERROR] X: " << xCoords[x] << " Y: " << yCoords[x] << " are not valid coordinates";
         }
       }
       if (coordValidCheck == ships[i].getLength()){
-        std::cout << std::endl << "ENTERED COORD VALID CHECK";
         for (int x = 0; x < yCoords.size(); x++){
           auto it = board[yCoords[x]].begin() + xCoords[x];
           board[yCoords[x]][xCoords[x]] = 1;
@@ -183,12 +174,13 @@ void gamemodeSetup(int mode, mINI::INIStructure setup){
 int main() {
   std::cout << "Starting up...\n\n";
   mINI::INIStructure setup = readIni();
-  board b1(setup);
-  board b2(setup);
+  board b1(setup, "Player 1");
+  board b2(setup, "Player 2");
   std::vector<std::vector<int>> b1Board = b1.createBoardMap(setup);
   std::vector<std::vector<int>> b2Board = b2.createBoardMap(setup);
   int mode = menu();
   gamemodeSetup(mode, setup);
+  std::string name = "Player";
   b1.boardDraw(setup, b1Board);
   std::cout << std::endl;
   b2.boardDraw(setup, b2Board);
