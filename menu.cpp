@@ -13,9 +13,19 @@ int mainMenu(){
   for(int i = 0; i < modes.size(); i++){
     std::cout << i+1 << ".\t" << modes[i] << "\n";
   }
-  std::cout << std::endl << "Please enter a game mode number: ";
+  bool valid = false;
   int select;
-  std::cin >> select;
+  while (!valid){
+    std::cout << std::endl << "Please enter a game mode number: ";
+    std::string strSelect;
+    std::cin >> strSelect;
+    if ((strSelect == "1") || (strSelect == "2") || (strSelect == "3")|| (strSelect == "4")|| (strSelect == "5")|| (strSelect == "6")|| (strSelect == "7")|| (strSelect == "8")){
+      select = stoi(strSelect);
+      valid = true;
+    }else{
+      std::cout << std::endl << "INVALID SELECTION" << std::endl;
+    }
+  }
   return select;
 }
 
@@ -41,11 +51,51 @@ void shipOverview(std::string player, std::vector<Ships> ships){
 
 int confirmationMenu(){
   int selection;
-  std::cout << std::endl << "Please select an option to continue: " << std::endl;
-  std::cout << "1 - Continue to game" << std::endl;
-  std::cout << "2 - Reset Board" << std::endl;
-  std::cout << "3 - Quit" << std::endl;
-  std::cout << "Please choose option 1, 2 or 3: ";
-  std::cin >> selection;
+  std::string strSelection;
+  bool valid = false;
+  while(!valid){
+    std::cout << std::endl << "Please select an option to continue: " << std::endl;
+    std::cout << "1 - Continue to game" << std::endl;
+    std::cout << "2 - Reset Board" << std::endl;
+    std::cout << "3 - Quit" << std::endl;
+    std::cout << "Please choose option 1, 2 or 3: ";
+    std::cin.ignore();
+    std::cin >> strSelection;
+    if ((strSelection == "1") || (strSelection == "2") || (strSelection == "3")){
+      selection = stoi(strSelection);
+      valid = true;
+    }else{
+      std::cout << std::endl << "INVALID SELECTION" << std::endl;
+    }
+  }
   return selection;
+}
+
+int gameLoopMenu(){
+  int selection;
+  std::string strSelection;
+  bool valid = false;
+  while(!valid){
+    std::cout << std::endl << "What would you like to do next?" << std::endl;
+    std::cout << "1 - End Turn" << std::endl;
+    std::cout << "2 - View Your Ships stats" << std::endl;
+    std::cout << "3 - Quit" << std::endl;
+    std::cout << "Please choose option 1, 2 or 3: ";
+    std::cin.ignore();
+    std::cin >> selection;
+    if ((strSelection == "1") || (strSelection == "2") || (strSelection == "3")){
+      selection = stoi(strSelection);
+      valid = true;
+    }else{
+      std::cout << std::endl << "INVALID SELECTION" << std::endl;
+    }
+  }
+  return selection;
+}
+
+int pressAnyKeyToContinue(){
+  int temp;
+  std::cout << "Press any key to continue";
+  std::cin >> temp;
+  return 0;
 }

@@ -220,5 +220,4 @@ int main() {
       std::cout << std::endl << "---- INVALID CHOICE ---";
     }
   }
-  
 }

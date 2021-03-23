@@ -38,7 +38,7 @@ int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> boa
     for (int i = 0; i < (stoi(setup["board"]["x"])+1); i++){
       
       if ((y == 0) && (i != 0)) {
-        std::cout << "|" << std::setfill('-') << std::setw(4) << "-" + alphabet[i-1] + "-" << std::setfill(' ');
+        std::cout << "|" << std::setfill('-') << std::setw(5) << "-" + alphabet[i-1] + "--" << std::setfill(' ');
         if (maxX < i){
           maxX = i;
         }
@@ -67,8 +67,8 @@ int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> boa
               shipPiece = "m";
               // shipPiece = "m";
             }
-            std::cout << std::right <<std::setw(4)<< " " + shipPiece + " " << "|";
-          }else{std::cout <<std::setw(5)<< "|";}
+            std::cout << std::right <<std::setw(5)<< " " + shipPiece + "  " << "|";
+          }else{std::cout <<std::setw(6)<< "|";}
           
         }
       }
@@ -79,7 +79,7 @@ int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> boa
     
   }
   for (int i = 0; i < maxX; i++){
-    std::cout << "|----";
+    std::cout << "|-----";
   }
   std::cout << "|";
   // ------- PRINTS GRID AS TEXT --------------

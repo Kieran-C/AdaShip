@@ -3,6 +3,7 @@
 #include "board.h"
 // #include "Ships.h"
 #include "menu.h"
+#include "helpers.h"
 
 std::vector<char> charAlpha {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
@@ -14,13 +15,16 @@ std::vector<int> convertPointToCoord(std::string point){
   }
   int yCoord = stoi(strYCoord);
   yCoord--;
+  std::cout << std::endl << "convertY: " << yCoord;
   auto it = std::find(charAlpha.begin(), charAlpha.end(), point[0]);
   if (it != charAlpha.end()){
     int xIndex = it - charAlpha.begin();
     xCoord = xIndex + 1;
     xCoord--;
+    std::cout << std::endl << "convertX: " << xCoord; 
   }
   std::vector<int> pointCoords {yCoord, xCoord};
+  std::cout << std::endl << "VecY: " << pointCoords[0] << " VecX: " << pointCoords[1];
   return pointCoords;
 }
 
@@ -71,11 +75,21 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
       notCurrentPlayer = tempPlayer;
     }
     if (currentPlayer.getPlayerType() == 1){//Human Player
-      std::string point = playerShooting();
-      pointCoord = convertPointToCoord(point);
+      bool valid = false;
+      while (!valid){
+        std::string point = playerShooting();
+        pointCoord = convertPointToCoord(point);
+        std::cout << std::endl << "BACK " << pointCoord.size();
+        std::cout << std::endl << "y: " << pointCoord[0]; //<< " x: " << pointCoord[1]
+        if ((pointCoord[0] >= 0) && (pointCoord[0] <= b1Board.size()) && (pointCoord[1] >= 0) && (pointCoord[1] <= b1Board[0].size())){
+          valid = true;
+        }else{std::cout << std::endl << "INVALID POINT" << std::endl;}
+      }
+      
     }else{//AI Player
-      std::cout << std::endl << "AI PLAYER NOT YET IMPLEMENTED";
-      pointCoord = {0,0};
+      int x = (helpers::generateNumber(10))-1;
+      int y = (helpers::generateNumber(10))-1;
+      pointCoord = {y,x};
     }
     for (auto &i: allShipList[(notCurrentPlayer.getPlayerId())-1]){
       if (currentPlayer.getPlayerId() == 1){
@@ -91,8 +105,23 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
     if ((player1Win)||(player2Win)){
       play = !play;
     }
-    shipOverview("Player 1", allShipList[0]);
-    shipOverview("Player 2", allShipList[1]);
+    int endTurnSelection;
+    if (currentPlayer.getPlayerType() == 1){
+      endTurnSelection = gameLoopMenu();
+    }else{
+      endTurnSelection = pressAnyKeyToContinue();
+    }
+    std::cout << std::endl << "endTurnSelection: " << endTurnSelection;
+    if (endTurnSelection == 1){
+      std::cout << std::endl<< "Next Player...";
+    }else if (endTurnSelection == 2){
+      std::cout << "DID THIS";
+      shipOverview("Player " + std::to_string(currentPlayer.getPlayerId()), allShipList[0]);
+    }else if (endTurnSelection == 3){
+      exit(0);
+    }
+    // shipOverview("Player 1", allShipList[0]);
+    // shipOverview("Player 2", allShipList[1]);
     turn++;
   }
   std::cout << std::endl << "P1 Win? " << player1Win;
