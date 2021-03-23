@@ -202,8 +202,6 @@ int main() {
   b2Board = placeShips(b2Board, allShipList[1], true);
   b1.boardDraw(setup, b1Board);
   b2.boardDraw(setup, b2Board);
-  b1.boardDraw(setup, b1Board);
-  b2.boardDraw(setup, b2Board);
   shipOverview("Player 1", allShipList[0]);
   // shipOverview("Player 2", allShipList[1]);
   while (!continueGame){

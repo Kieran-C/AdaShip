@@ -1,7 +1,8 @@
 #include <iostream>
 #include "Player.h"
 #include "board.h"
-#include "Ships.h"
+// #include "Ships.h"
+#include "menu.h"
 
 std::vector<char> charAlpha {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
@@ -67,6 +68,8 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
           b1Board = i.isShipHit(pointCoord, b1Board);
         }
       }
+    shipOverview("Player 1", allShipList[0]);
+    shipOverview("Player 2", allShipList[1]);
     turn++;
   }
 }

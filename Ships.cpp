@@ -141,8 +141,12 @@ std::vector<std::vector<int>> Ships::isShipHit(std::vector<int> coords, std::vec
     updatedBoard = board;
     return updatedBoard;
   }else{
-    board[coords[0]][coords[1]] = 7;
-    updatedBoard = board;
+    if (board[coords[0]][coords[1]] == 0){
+      board[coords[0]][coords[1]] = 7;
+      updatedBoard = board;
+    }else {
+      updatedBoard = board;
+    }
     return updatedBoard;
   }
 }
