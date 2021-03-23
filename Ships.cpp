@@ -126,7 +126,8 @@ void Ships::clearYCoordinates(){
   Ships::shipYCoordinates.clear();
 }
 
-bool Ships::isShipHit(std::vector<int> coords){
+std::vector<std::vector<int>> Ships::isShipHit(std::vector<int> coords, std::vector<std::vector<int>> board){
+  std::vector<std::vector<int>> updatedBoard;
   auto yResult = std::find(Ships::shipYCoordinates.begin(), Ships::shipYCoordinates.end(), coords[0]);
   auto xResult = std::find(Ships::shipXCoordinates.begin(), Ships::shipXCoordinates.end(), coords[1]);
   if ((yResult != end(Ships::shipYCoordinates)) && (xResult != end(Ships::shipXCoordinates))){
@@ -136,8 +137,12 @@ bool Ships::isShipHit(std::vector<int> coords){
     Ships::shipYCoordinates.erase(Ships::shipYCoordinates.begin() + indexYResult);
     Ships::shipXCoordinates.erase(Ships::shipXCoordinates.begin() + indexXResult);
     Ships::setHealth(Ships::getHealth()-1);
-    return true;
+    board[coords[0]][coords[1]] = 6;
+    updatedBoard = board;
+    return updatedBoard;
   }else{
-    return false;
+    board[coords[0]][coords[1]] = 7;
+    updatedBoard = board;
+    return updatedBoard;
   }
 }

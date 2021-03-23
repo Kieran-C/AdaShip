@@ -30,13 +30,18 @@ std::string playerShooting(){
   return shotPoint;
 }
 
-void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vector<std::vector<int>> b1Board, std::vector<std::vector<int>> b2Board, mINI::INIStructure setup, std::vector<std::vector<Ships>>& allShipList){
+void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vector<std::vector<int>>& b1Board, std::vector<std::vector<int>>& b2Board, mINI::INIStructure setup, std::vector<std::vector<Ships>>& allShipList){
   bool play = true;
   int turn = 1;
   Player& currentPlayer = player1;
   Player& notCurrentPlayer = player2;
   std::vector<int> pointCoord;
   while (play){
+    std::cout << std::endl;
+    b1.boardDraw(setup, b1Board);
+    std::cout << std::endl;
+    b2.boardDraw(setup, b2Board);
+    std::cout << std::endl;
     pointCoord.clear();
     bool hit = false;
     Player tempPlayer = currentPlayer; 
@@ -56,7 +61,11 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
       pointCoord = {0,0};
     }
     for (auto &i: allShipList[(notCurrentPlayer.getPlayerId())-1]){
-        hit = i.isShipHit(pointCoord);
+        if (currentPlayer.getPlayerId() == 1){
+          b2Board = i.isShipHit(pointCoord, b2Board);
+        }else{
+          b1Board = i.isShipHit(pointCoord, b1Board);
+        }
       }
     turn++;
   }

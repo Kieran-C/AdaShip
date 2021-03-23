@@ -30,7 +30,7 @@ void board::setHeight(int passedHeight){
 }
 
 int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> board){
-  std::cout << std::endl << std::setfill('-') << std::setw((width*5)/2) << "-";
+  std::cout << std::right << std::endl << std::setfill('-') << std::setw((width*5)/2) << "-";
   std::cout << board::name;
   std::cout << std::setfill('-') << std::setw((width*5)/2) << "-" << std::endl << std::endl;
   int maxX = 0;
@@ -38,7 +38,7 @@ int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> boa
     for (int i = 0; i < (stoi(setup["board"]["x"])+1); i++){
       
       if ((y == 0) && (i != 0)) {
-        std::cout << "|" << std::setfill('-') << std::setw(4) << alphabet[i-1] << std::setfill(' ');
+        std::cout << "|" << std::setfill('-') << std::setw(4) << "-" + alphabet[i-1] + "-" << std::setfill(' ');
         if (maxX < i){
           maxX = i;
         }
@@ -60,8 +60,14 @@ int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> boa
               shipPiece = "S";
             }else if (piece == 5){
               shipPiece = "P";
+            }else if (piece == 6){
+              // shipPiece = "■";
+              shipPiece = "h";
+            }else if (piece == 7){
+              shipPiece = "m";
+              // shipPiece = "m";
             }
-            std::cout <<std::setw(4)<< shipPiece << "|";
+            std::cout << std::right <<std::setw(4)<< " " + shipPiece + " " << "|";
           }else{std::cout <<std::setw(5)<< "|";}
           
         }

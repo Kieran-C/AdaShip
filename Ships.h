@@ -38,7 +38,7 @@ class Ships {
     void appendNewCoordinate (char axis, int coord);
     void clearXCoordinates();
     void clearYCoordinates();
-    bool isShipHit(std::vector<int> coords);
+    std::vector<std::vector<int>> isShipHit(std::vector<int> coords, std::vector<std::vector<int>> board);
     void setShipId(int passedId);
     int getShipId();
 };
