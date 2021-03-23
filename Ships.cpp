@@ -106,7 +106,7 @@ void Ships::clearYCoordinates(){
 }
 
 bool Ships::isShipOnCoordinates(std::vector<int> coords){
-  auto yResult = std::find(Ships::shipXCoordinates.begin(), Ships::shipXCoordinates.end(), coords[0]);
+  auto yResult = std::find(Ships::shipYCoordinates.begin(), Ships::shipYCoordinates.end(), coords[0]);
   auto xResult = std::find(Ships::shipXCoordinates.begin(), Ships::shipXCoordinates.end(), coords[1]);
   if ((yResult != end(Ships::shipYCoordinates)) && (xResult != end(Ships::shipXCoordinates))){
     std::cout << std::endl << "HIT SHIP AT: X - " << coords[1] << " Y - " << coords[0];

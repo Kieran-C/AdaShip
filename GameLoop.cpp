@@ -35,26 +35,28 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
   int turn = 1;
   Player& currentPlayer = player1;
   Player& notCurrentPlayer = player2;
-  if (turn % 2 == 0){
-    currentPlayer = player2;
-    notCurrentPlayer = player1;
-  }else {
-    currentPlayer = player1;
-    notCurrentPlayer = player2;
-  }
+  std::vector<int> pointCoord;
   while (play){
+    pointCoord.clear();
+    Player tempPlayer = currentPlayer; 
+    if (turn == 1) {
+    }else if (turn % 2 == 0){
+      currentPlayer = notCurrentPlayer;
+      notCurrentPlayer = tempPlayer;
+      std::cout << std::endl << "SWITCHED PLAYERS (if) - TURN " << turn;
+    }else {
+      currentPlayer = notCurrentPlayer;
+      notCurrentPlayer = tempPlayer;
+      std::cout << std::endl << "SWITCHED PLAYERS (else) - TURN " << turn;
+    }
     if (currentPlayer.getPlayerType() == 1){//Human Player
-      std::cout << std::endl << "Line 46 executed";
       std::string point = playerShooting();
-      std::cout << std::endl << "Line 48 executed";
-      std::vector<int> pointCoord = convertPointToCoord(point);
-      std::cout << std::endl << "Line 50 executed";
-      std::cout << "NUM OF SHIP IN GAMELOOP: " << allShipList[notCurrentPlayer.getPlayerId()-1].size();
-      for (auto &i: allShipList[notCurrentPlayer.getPlayerId()-1]){
+      pointCoord = convertPointToCoord(point);
+      for (auto &i: allShipList[(notCurrentPlayer.getPlayerId())-1]){
         bool hit = i.isShipOnCoordinates(pointCoord);
       }
     }else{//AI Player
-
+      std::cout << std::endl << "AI PLAYER NOT YET IMPLEMENTED";
     }
     turn++;
   }
