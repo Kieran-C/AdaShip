@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <vector>
 #include <iostream> 
+#include <algorithm>
 
 Ships::Ships(std::string type, std::string passedDirection, mINI::INIStructure setup){
   shipType = type;
@@ -102,4 +103,15 @@ void Ships::clearXCoordinates(){
 
 void Ships::clearYCoordinates(){
   Ships::shipYCoordinates.clear();
+}
+
+bool Ships::isShipOnCoordinates(std::vector<int> coords){
+  auto yResult = std::find(Ships::shipXCoordinates.begin(), Ships::shipXCoordinates.end(), coords[0]);
+  auto xResult = std::find(Ships::shipXCoordinates.begin(), Ships::shipXCoordinates.end(), coords[1]);
+  if ((yResult != end(Ships::shipYCoordinates)) && (xResult != end(Ships::shipXCoordinates))){
+    std::cout << std::endl << "HIT SHIP AT: X - " << coords[1] << " Y - " << coords[0];
+    return true;
+  }else{
+    return false;
+  }
 }

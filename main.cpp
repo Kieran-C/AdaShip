@@ -7,6 +7,7 @@
 #include <vector>
 #include <iomanip>
 #include "helpers.h"
+#include "GameLoop.h"
 
 std::vector<Player> playerList;
 std::vector<std::vector<Ships>> allShipList;
@@ -200,13 +201,14 @@ int main() {
   b1Board = placeShips(b1Board, allShipList[0], false);
   b2Board = placeShips(b2Board, allShipList[1], true);
   b1.boardDraw(setup, b1Board);
-  // b2.boardDraw(setup, b2Board);
+  b2.boardDraw(setup, b2Board);
   shipOverview("Player 1", allShipList[0]);
   // shipOverview("Player 2", allShipList[1]);
   while (!continueGame){
     int subMenuDecision = confirmationMenu();
     if (subMenuDecision == 1){
       continueGame = true;
+      mainLoop(playerList[0], playerList[1], b1, b2, b1Board, b2Board, setup, allShipList);
     }else if (subMenuDecision == 2){
       b1Board = resetBoard(b1Board , b1, setup, allShipList[0]);
       b1.boardDraw(setup, b1Board);
