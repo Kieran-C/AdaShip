@@ -31,8 +31,18 @@ std::string playerShooting(){
   return shotPoint;
 }
 
-bool checkForWinner(){
-
+bool areAllPlayerShipsDead(std::vector<Ships> ships){
+  bool allShipsDead = false;
+  int deadShips = 0;
+  for (auto &i: ships){
+    if (i.getActive() == false){
+      deadShips++;
+    }
+  }
+  if (deadShips == ships.size()){
+    allShipsDead = true;
+  }else{allShipsDead = false;}
+  return allShipsDead;
 }
 
 void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vector<std::vector<int>>& b1Board, std::vector<std::vector<int>>& b2Board, mINI::INIStructure setup, std::vector<std::vector<Ships>>& allShipList){
@@ -41,6 +51,8 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
   Player& currentPlayer = player1;
   Player& notCurrentPlayer = player2;
   std::vector<int> pointCoord;
+  bool player1Win;
+  bool player2Win;
   while (play){
     std::cout << std::endl;
     b1.boardDraw(setup, b1Board);
@@ -66,16 +78,23 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
       pointCoord = {0,0};
     }
     for (auto &i: allShipList[(notCurrentPlayer.getPlayerId())-1]){
-        if (currentPlayer.getPlayerId() == 1){
-          b2Board = i.isShipHit(pointCoord, b2Board);
-          i.isShipSunk();
-        }else{
-          b1Board = i.isShipHit(pointCoord, b1Board);
-          i.isShipSunk();
-        }
+      if (currentPlayer.getPlayerId() == 1){
+        b2Board = i.isShipHit(pointCoord, b2Board);
+        i.isShipSunk();
+      }else{
+        b1Board = i.isShipHit(pointCoord, b1Board);
+        i.isShipSunk();
       }
+    }
+    player1Win = areAllPlayerShipsDead(allShipList[1]);
+    player2Win = areAllPlayerShipsDead(allShipList[0]);
+    if ((player1Win)||(player2Win)){
+      play = !play;
+    }
     shipOverview("Player 1", allShipList[0]);
     shipOverview("Player 2", allShipList[1]);
     turn++;
   }
+  std::cout << std::endl << "P1 Win? " << player1Win;
+  std::cout << std::endl << "P2 Win? " << player2Win;
 }
