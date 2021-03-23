@@ -31,6 +31,10 @@ std::string playerShooting(){
   return shotPoint;
 }
 
+bool checkForWinner(){
+
+}
+
 void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vector<std::vector<int>>& b1Board, std::vector<std::vector<int>>& b2Board, mINI::INIStructure setup, std::vector<std::vector<Ships>>& allShipList){
   bool play = true;
   int turn = 1;
@@ -64,8 +68,10 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
     for (auto &i: allShipList[(notCurrentPlayer.getPlayerId())-1]){
         if (currentPlayer.getPlayerId() == 1){
           b2Board = i.isShipHit(pointCoord, b2Board);
+          i.isShipSunk();
         }else{
           b1Board = i.isShipHit(pointCoord, b1Board);
+          i.isShipSunk();
         }
       }
     shipOverview("Player 1", allShipList[0]);

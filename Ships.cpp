@@ -126,6 +126,15 @@ void Ships::clearYCoordinates(){
   Ships::shipYCoordinates.clear();
 }
 
+bool Ships::isShipSunk(){
+  if (Ships::getHealth() <= 0){
+    Ships::setActive(false);
+    return true;
+  }else{
+    return false;
+  }
+}
+
 std::vector<std::vector<int>> Ships::isShipHit(std::vector<int> coords, std::vector<std::vector<int>> board){
   std::vector<std::vector<int>> updatedBoard;
   auto yResult = std::find(Ships::shipYCoordinates.begin(), Ships::shipYCoordinates.end(), coords[0]);

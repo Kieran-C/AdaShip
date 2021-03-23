@@ -22,12 +22,18 @@ int mainMenu(){
 void shipOverview(std::string player, std::vector<Ships> ships){
   std::cout << std::endl << std::endl << std::setfill('-') << std::left << std::setw(35) << "|----" + player + "'s Ships" << "|" << std::endl;
   std::string placement;
+  std::string floating;
   for (auto &y: ships){
     if (y.getPlaced() == 1){
       placement = "Placed";
     }else{placement = "Not Placed";}
-      std::cout << "|" << std::setfill(' ') << std::right << std::setw(35) << "|" << std::endl << "|" << std::setfill(' ') << std::left << std::setw(30) << y.getType() + ":" <<std::right << std::setw(5) <<"|"<<std::endl;
-     std::cout << std::left << std::setw(30) << "|Board Status: " + placement << std::right << std::setw(6) << "|" << std::endl;
+    if (y.getActive() == false){
+      floating = "Sunk";
+    }else {
+      floating = "Afloat";
+    }
+    std::cout << "|" << std::setfill(' ') << std::right << std::setw(35) << "|" << std::endl << "|" << std::setfill(' ') << std::left << std::setw(30) << y.getType() + ":" <<std::right << std::setw(5) <<"|"<<std::endl;
+     std::cout << std::left << std::setw(30) << "|Board Status: " + placement + "/" + floating << std::right << std::setw(6) << "|" << std::endl;
      std::cout << std::left << std::setw(30) << "|Health: " + std::to_string(y.getHealth()) << std::right << std::setw(6) << "|" << std::endl;
    }
   std::cout << std::setfill('-') << std::left << std::setw(35) << "|----" << "|" << std::endl; 

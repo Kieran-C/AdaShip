@@ -41,4 +41,5 @@ class Ships {
     std::vector<std::vector<int>> isShipHit(std::vector<int> coords, std::vector<std::vector<int>> board);
     void setShipId(int passedId);
     int getShipId();
+    bool isShipSunk();
 };
