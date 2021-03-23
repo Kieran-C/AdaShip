@@ -13,6 +13,7 @@ class Ships {
     bool placed;
     std::vector<int> shipXCoordinates;
     std::vector<int> shipYCoordinates;
+    int shipId;
 
   public:
     Ships(std::string type, std::string passedDirection, mINI::INIStructure setup);
@@ -38,4 +39,6 @@ class Ships {
     void clearXCoordinates();
     void clearYCoordinates();
     bool isShipOnCoordinates(std::vector<int> coords);
+    void setShipId(int passedId);
+    int getShipId();
 };

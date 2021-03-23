@@ -43,11 +43,9 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
     }else if (turn % 2 == 0){
       currentPlayer = notCurrentPlayer;
       notCurrentPlayer = tempPlayer;
-      std::cout << std::endl << "SWITCHED PLAYERS (if) - TURN " << turn;
     }else {
       currentPlayer = notCurrentPlayer;
       notCurrentPlayer = tempPlayer;
-      std::cout << std::endl << "SWITCHED PLAYERS (else) - TURN " << turn;
     }
     if (currentPlayer.getPlayerType() == 1){//Human Player
       std::string point = playerShooting();
@@ -57,6 +55,7 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
       }
     }else{//AI Player
       std::cout << std::endl << "AI PLAYER NOT YET IMPLEMENTED";
+      pointCoord = {0,0};
     }
     turn++;
   }

@@ -111,7 +111,7 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
       }
       if (coordValidCheck == ships[i].getLength()){
         for (int x = 0; x < yCoords.size(); x++){
-          board[yCoords[x]][xCoords[x]] = 1;
+          board[yCoords[x]][xCoords[x]] = ships[i].getShipId();
           ships[i].setPlaced(true);
           ships[i].appendNewCoordinate('x', xCoords[x]);
           ships[i].appendNewCoordinate('y', yCoords[x]);

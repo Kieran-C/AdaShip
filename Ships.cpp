@@ -15,6 +15,19 @@ Ships::Ships(std::string type, std::string passedDirection, mINI::INIStructure s
   placed = false;
   shipXCoordinates;
   shipYCoordinates;
+  if (type[0] == 'c'){
+    shipId = 1;
+  }else if (type[0] == 'b'){
+    shipId = 2;
+  }else if (type[0] == 'd'){
+    shipId = 3;
+  }else if (type[0] == 's'){
+    shipId = 4;
+  }else if (type[0] == 'p'){
+    shipId = 5;
+  }else{
+    shipId = 0;
+  }
 }
 
 std::string Ships::getType(){
@@ -87,6 +100,14 @@ std::vector<int> Ships::getYCoordinates(){
 
 void Ships::setYCoordinates(std::vector<int> shipYCoords){
   Ships::shipYCoordinates = shipYCoordinates;
+}
+
+void Ships::setShipId(int passedId){
+  Ships::shipId = passedId;
+}
+
+int Ships::getShipId(){
+  return Ships::shipId;
 }
 
 void Ships::appendNewCoordinate(char axis, int coord){

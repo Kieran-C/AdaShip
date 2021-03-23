@@ -48,7 +48,20 @@ int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> boa
           std::cout << "|";
         }else{
           if (board[y-1][i-1] != 0){
-            std::cout <<std::setw(4)<< board[y-1][i-1] << "|";
+            std::string shipPiece;
+            int piece = board[y-1][i-1];
+            if (piece == 1){
+              shipPiece = "C";
+            }else if (piece == 2){
+              shipPiece = "B";
+            }else if (piece == 3){
+              shipPiece = "D";
+            }else if (piece == 4){
+              shipPiece = "S";
+            }else if (piece == 5){
+              shipPiece = "P";
+            }
+            std::cout <<std::setw(4)<< shipPiece << "|";
           }else{std::cout <<std::setw(5)<< "|";}
           
         }
