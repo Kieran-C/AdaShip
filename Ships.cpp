@@ -126,11 +126,16 @@ void Ships::clearYCoordinates(){
   Ships::shipYCoordinates.clear();
 }
 
-bool Ships::isShipOnCoordinates(std::vector<int> coords){
+bool Ships::isShipHit(std::vector<int> coords){
   auto yResult = std::find(Ships::shipYCoordinates.begin(), Ships::shipYCoordinates.end(), coords[0]);
   auto xResult = std::find(Ships::shipXCoordinates.begin(), Ships::shipXCoordinates.end(), coords[1]);
   if ((yResult != end(Ships::shipYCoordinates)) && (xResult != end(Ships::shipXCoordinates))){
     std::cout << std::endl << "HIT SHIP AT: X - " << coords[1] << " Y - " << coords[0];
+    int indexYResult = std::distance(Ships::shipYCoordinates.begin(), yResult);
+    int indexXResult = std::distance(Ships::shipXCoordinates.begin(), xResult);
+    Ships::shipYCoordinates.erase(Ships::shipYCoordinates.begin() + indexYResult);
+    Ships::shipXCoordinates.erase(Ships::shipXCoordinates.begin() + indexXResult);
+    Ships::setHealth(Ships::getHealth()-1);
     return true;
   }else{
     return false;

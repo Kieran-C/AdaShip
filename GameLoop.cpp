@@ -38,6 +38,7 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
   std::vector<int> pointCoord;
   while (play){
     pointCoord.clear();
+    bool hit = false;
     Player tempPlayer = currentPlayer; 
     if (turn == 1) {
     }else if (turn % 2 == 0){
@@ -50,13 +51,13 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
     if (currentPlayer.getPlayerType() == 1){//Human Player
       std::string point = playerShooting();
       pointCoord = convertPointToCoord(point);
-      for (auto &i: allShipList[(notCurrentPlayer.getPlayerId())-1]){
-        bool hit = i.isShipOnCoordinates(pointCoord);
-      }
     }else{//AI Player
       std::cout << std::endl << "AI PLAYER NOT YET IMPLEMENTED";
       pointCoord = {0,0};
     }
+    for (auto &i: allShipList[(notCurrentPlayer.getPlayerId())-1]){
+        hit = i.isShipHit(pointCoord);
+      }
     turn++;
   }
 }
