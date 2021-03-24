@@ -57,6 +57,7 @@ bool areAllPlayerShipsDead(std::vector<Ships> ships){
 }
 
 void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vector<std::vector<int>>& b1Board, std::vector<std::vector<int>>& b2Board, mINI::INIStructure setup, std::vector<std::vector<Ships>>& allShipList){
+  win(2);
   bool play = true;
   int turn = 1;
   Player& currentPlayer = player1;
@@ -127,6 +128,9 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
     }
     turn++;
   }
-  std::cout << std::endl << "P1 Win? " << player1Win;
-  std::cout << std::endl << "P2 Win? " << player2Win;
+  if(player1Win){
+    win(1);
+  }else if (player2Win){
+    win(2);
+  }
 }

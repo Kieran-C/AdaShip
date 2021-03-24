@@ -102,3 +102,55 @@ void pressAnyKeyToContinue(){
   std::cout << std::endl << "Press Enter to continue" << std::endl;
   std::cin.get();
 }
+
+void win(int player){
+  if (player == 1){
+    std::cout << std::endl << std::endl; 
+    std::cout << std::endl << " _____  _           __     ________ _____"; 
+    std::cout << std::endl << "|  __ \\| |        /\\ \\   / /  ____|  __ \\ ";   
+    std::cout << std::endl << "| |__) | |       /  \\ \\_/ /| |__  | |__) | "; 
+    std::cout << std::endl << "|  ___/| |      / /\\ \\   / |  __| |  _  /  "; 
+    std::cout << std::endl << "| |    | |____ / ____ \\| | | |____| | \\ \\  "; 
+    std::cout << std::endl << "|_|    |______/_/    \\_\\_| |______|_|  \\_\\ "; 
+    std::cout << std::endl << "                                            "; 
+    std::cout << std::endl << "                                            "; 
+    std::cout << std::endl << "  __  "; 
+    std::cout << std::endl << " /_ | "; 
+    std::cout << std::endl << "  | | "; 
+    std::cout << std::endl << "  | | "; 
+    std::cout << std::endl << "  | | "; 
+    std::cout << std::endl << "  |_| "; 
+    std::cout << std::endl << "      "; 
+    std::cout << std::endl << "      "; 
+    std::cout << std::endl << "__          _______ _   _  _____ "; 
+    std::cout << std::endl << "\\ \\        / /_   _| \\ | |/ ____|"; 
+    std::cout << std::endl << " \\ \\  /\\  / /  | | |  \\| | (___  "; 
+    std::cout << std::endl << "  \\ \\/  \\/ /   | | | . ` |\\___ \\ "; 
+    std::cout << std::endl << "   \\  /\\  /   _| |_| |\\  |____) |"; 
+    std::cout << std::endl << "    \\/  \\/   |_____|_| \\_|_____/ "; 
+  }else if(player == 2){
+    std::cout << std::endl << std::endl; 
+    std::cout << std::endl << " _____  _           __     ________ _____"; 
+    std::cout << std::endl << "|  __ \\| |        /\\ \\   / /  ____|  __ \\ ";   
+    std::cout << std::endl << "| |__) | |       /  \\ \\_/ /| |__  | |__) | "; 
+    std::cout << std::endl << "|  ___/| |      / /\\ \\   / |  __| |  _  /  "; 
+    std::cout << std::endl << "| |    | |____ / ____ \\| | | |____| | \\ \\  "; 
+    std::cout << std::endl << "|_|    |______/_/    \\_\\_| |______|_|  \\_\\ "; 
+    std::cout << std::endl << "                                            "; 
+    std::cout << std::endl << "                                            "; 
+    std::cout << std::endl << "   ___   "; 
+    std::cout << std::endl << "  |__ \\ "; 
+    std::cout << std::endl << "     ) | "; 
+    std::cout << std::endl << "    / / "; 
+    std::cout << std::endl << "   / /_  "; 
+    std::cout << std::endl << "  |____| "; 
+    std::cout << std::endl << "      "; 
+    std::cout << std::endl << "      "; 
+    std::cout << std::endl << "__          _______ _   _  _____ "; 
+    std::cout << std::endl << "\\ \\        / /_   _| \\ | |/ ____|"; 
+    std::cout << std::endl << " \\ \\  /\\  / /  | | |  \\| | (___  "; 
+    std::cout << std::endl << "  \\ \\/  \\/ /   | | | . ` |\\___ \\ "; 
+    std::cout << std::endl << "   \\  /\\  /   _| |_| |\\  |____) |"; 
+    std::cout << std::endl << "    \\/  \\/   |_____|_| \\_|_____/ "; 
+  }
+}
