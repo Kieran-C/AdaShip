@@ -213,6 +213,21 @@ std::vector<std::vector<int>> resetBoard(std::vector<std::vector<int>> passedBoa
   return b.createBoardMap(setup);
 }
 
+bool areAllShipsPlaced(std::vector<Ships> ships){
+  int totalShipsPlaced = 0;
+  for (auto &i: ships){
+    if (i.getPlaced() == true){
+      totalShipsPlaced++;
+    }
+  }
+  if (totalShipsPlaced == ships.size()){
+    return true;
+  }else{
+    return false;
+  }
+
+}
+
 int main() {
   bool continueGame = false;
   std::cout << "Starting up...\n\n";
@@ -233,12 +248,31 @@ int main() {
   while (!continueGame){
     int subMenuDecision = confirmationMenu();
     if (subMenuDecision == 1){
-      continueGame = true;
-      mainLoop(playerList[0], playerList[1], b1, b2, b1Board, b2Board, setup, allShipList);
+      if (areAllShipsPlaced(allShipList[0])){
+        continueGame = true;
+        mainLoop(playerList[0], playerList[1], b1, b2, b1Board, b2Board, setup, allShipList);
+      }else{
+        std::cout << std::endl << "Cannot play game whilst not all ships are placed" << std::endl;
+      }
     }else if (subMenuDecision == 2){
       b1Board = resetBoard(b1Board , b1, setup, allShipList[0]);
       b1.boardDraw(setup, b1Board);
       shipOverview("Player 1", allShipList[0]);
+      std::string replace;
+      bool replaceShips = false;
+      while (!replaceShips){
+        std::cout << std::endl << "Do you want to re-place your ships? (y/n) ";
+        std::cin >> replace;
+        if (replace == "y"){
+          replaceShips = true;
+          b1Board = placeShips(b1Board, allShipList[0], false);
+        }else if(replace == "n"){
+          replaceShips = true;
+        }
+      }
+      b1.boardDraw(setup, b1Board);
+      shipOverview("Player 1", allShipList[0]);
+      
     }else if (subMenuDecision == 3){
       continueGame = true;
       exit(0);

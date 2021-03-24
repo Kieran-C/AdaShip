@@ -55,20 +55,20 @@ int confirmationMenu(){
   int selection;
   std::string strSelection;
   bool valid = false;
+  std::cin.ignore();
   while(!valid){
     std::cout << std::endl << "Please select an option to continue: " << std::endl;
     std::cout << "1 - Continue to game" << std::endl;
     std::cout << "2 - Reset Board" << std::endl;
     std::cout << "3 - Quit" << std::endl;
     std::cout << "Please choose option 1, 2 or 3: ";
-    std::cin.ignore();
     std::getline(std::cin, strSelection);
     if ((strSelection == "1") || (strSelection == "2") || (strSelection == "3")){
       selection = stoi(strSelection);
       valid = true;
       return selection;
     }else{
-      std::cout << std::endl << "INVALID SELECTION - confirmation menu" << std::endl;
+      std::cout << std::endl << "INVALID SELECTION - confirmation menu - " << strSelection << std::endl;
     }
   }
   return selection;
@@ -78,13 +78,13 @@ int gameLoopMenu(){
   int selection;
   std::string strSelection;
   bool valid = false;
+  std::cin.ignore();
   while(!valid){
     std::cout << std::endl << "What would you like to do next?" << std::endl;
     std::cout << "1 - End Turn" << std::endl;
     std::cout << "2 - View Your Ships stats" << std::endl;
     std::cout << "3 - Quit" << std::endl;
     std::cout << "Please choose option 1, 2 or 3: ";
-    std::cin.ignore();
     std::cin >> strSelection;
     if ((strSelection == "1") || (strSelection == "2") || (strSelection == "3")){
       selection = stoi(strSelection);
