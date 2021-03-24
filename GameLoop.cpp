@@ -82,13 +82,28 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
     }
     if (currentPlayer.getPlayerType() == 1){//Human Player
       bool valid = false;
-      while (!valid){
-        std::string point = playerShooting();
-        pointCoord = convertPointToCoord(point);
-        if ((pointCoord[0] >= 0) && (pointCoord[0] < b1Board.size()) && (pointCoord[1] >= 0) && (pointCoord[1] < b1Board[0].size())){
-          valid = true;
-        }else{std::cout << std::endl << "INVALID POINT" << std::endl;}
+      bool autoValid = false;
+      while (!autoValid){
+        std::string autoShoot;
+        std::cout << std::endl << "Do you want to auto shoot? (y/n) ";
+        std::cin >> autoShoot;
+        if (autoShoot == "y"){
+          autoValid = true;
+          int x = (helpers::generateNumber(10))-1;
+          int y = (helpers::generateNumber(10))-1;
+          pointCoord = {y,x};
+        }else if(autoShoot == "n"){
+          autoValid = true;
+          while (!valid){
+            std::string point = playerShooting();
+            pointCoord = convertPointToCoord(point);
+            if ((pointCoord[0] >= 0) && (pointCoord[0] < b1Board.size()) && (pointCoord[1] >= 0) && (pointCoord[1] < b1Board[0].size())){
+              valid = true;
+            }else{std::cout << std::endl << "INVALID POINT" << std::endl;}
+          }
+        }else{std::cout << std::endl << "Invalid Selection";}
       }
+      
       
     }else{//AI Player
       int x = (helpers::generateNumber(10))-1;

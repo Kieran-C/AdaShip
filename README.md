@@ -66,7 +66,7 @@ My approach to quality was to ensure things were done consistantly throughout th
   - [x] Their own, current and up to date ship and targetboards are displayed as well aligned tables
   - [x] Players are able to ‘fire’ a single torpedo at a valid location using the single notation coordinate
     - [x] If the location is invalid the player is asked to re-try.
-  - [ ] Auto ‘fire’ option; this option targets and ‘fires’ at valid locations.
+  - [x] Auto ‘fire’ option; this option targets and ‘fires’ at valid locations.
   - [x] Players are clearly notified of a ‘hit’ or ‘miss’ (or win) based on the outcome of their turn.
   - [x] Players are able to quit the game (if not already won).
   - [x] Players are required to ‘press a key’ to end their turn.
