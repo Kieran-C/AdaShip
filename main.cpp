@@ -26,10 +26,16 @@ std::vector<Ships> createShips(int numOfShips, bool mines, mINI::INIStructure se
 std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, std::vector<Ships>& ships, bool ai){
   std::string autoPlace;
   if (!ai){
-    std::cout << std::endl << "Do you want to auto-place your ships? (y/n): ";
-    std::cin >> autoPlace;
-    if (autoPlace == "y"){
-      ai = true;
+    bool autoValid = false;
+    while(!autoValid){
+      std::cout << std::endl << "Do you want to auto-place your ships? (y/n): ";
+      std::cin >> autoPlace;
+      if (autoPlace == "y"){
+        ai = true;
+        autoValid = true;
+      }else if (autoPlace == "n"){
+        autoValid = true;
+      }
     }
   }
   for (int i = 0; i < ships.size(); ++i){

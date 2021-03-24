@@ -8,20 +8,30 @@
 std::vector<char> charAlpha {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
 std::vector<int> convertPointToCoord(std::string point){
-  std::string strYCoord = ""; 
+  std::string col;
+  int row;
+  int yCoord;
   int xCoord;
-  for (int i = 1; i <= point.size(); i++){
-    strYCoord = strYCoord + point[i];
+  if (point != "auto"){
+    for (char &c : point){
+      if (isalpha(c)) {
+        col += c;
+      }
+    }
+    std::transform(col.begin(), col.end(), col.begin(), ::tolower);
+    row = stoi(point.substr(col.size(), point.size()));
+    yCoord = row - 1;
   }
-  int yCoord = stoi(strYCoord);
-  yCoord--;
-  auto it = std::find(charAlpha.begin(), charAlpha.end(), point[0]);
-  if (it != charAlpha.end()){
-    int xIndex = it - charAlpha.begin();
-    xCoord = xIndex + 1;
-    xCoord--;
+
+  for (int i = 0; i < col.size(); i++){
+    auto it = std::find(charAlpha.begin(), charAlpha.end(), col[i]);
+    if (it != charAlpha.end()){
+      int xIndex = it - charAlpha.begin();
+      xCoord = ((26 * i) + xIndex);
+    }
   }
   std::vector<int> pointCoords {yCoord, xCoord};
+  std::cout << std::endl << "Y Coord: " << yCoord << "X Coord: " << xCoord << std::endl;
   return pointCoords;
 }
 
@@ -111,11 +121,10 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
       std::cout << std::endl<< "Next Player...";
     }else if (endTurnSelection == 2){
       shipOverview("Player " + std::to_string(currentPlayer.getPlayerId()), allShipList[0]);
+      std::cout << std::endl<< "Next Player...";
     }else if (endTurnSelection == 3){
       exit(0);
     }
-    // shipOverview("Player 1", allShipList[0]);
-    // shipOverview("Player 2", allShipList[1]);
     turn++;
   }
   std::cout << std::endl << "P1 Win? " << player1Win;
