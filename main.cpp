@@ -236,8 +236,17 @@ int main() {
   board b2(setup, "Player 2");
   std::vector<std::vector<int>> b1Board = b1.createBoardMap(setup);
   std::vector<std::vector<int>> b2Board = b2.createBoardMap(setup);
-  int mode = mainMenu();
-  gamemodeSetup(mode, setup, b1, b2);
+  bool modeValid = false;
+  int mode;
+  while (!modeValid){
+    mode = mainMenu();
+    if ((mode == 1) || (mode == 8)){
+      modeValid = true;
+      gamemodeSetup(mode, setup, b1, b2);
+    }else if ((mode >= 2) && (mode <= 7)){
+      std::cout << std::endl << "GAMEMODE STILL IN DEVELOPMENT" << std::endl;
+    }
+  }
   b1.boardDraw(setup, b1Board);
   b1Board = placeShips(b1Board, allShipList[0], false);
   b2Board = placeShips(b2Board, allShipList[1], true);
