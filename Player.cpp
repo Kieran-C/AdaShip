@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Player.h"
 
+//function comments are above function declaration in header file
+
 Player::Player(int passedPlayerId, int passedPlayerType, int passedMode, int passedNumberOfShips, int passedBombs){
     playerId = passedPlayerId;
     playerType = passedPlayerType;
@@ -55,12 +57,4 @@ void Player::setNumOfBombs(int b){
 
 int Player::getNumOfBombs(){
   return Player::bombs;
-}
-
-bool Player::checkForShipAtLocation(std::string loc, bool destroyIfFound){
-  for (int i = 0; i <= Player::shipLocations.size(); i++){
-    if ((Player::shipLocations[i].compare(loc)) && (destroyIfFound)){
-      Player::shipLocations.erase(Player::shipLocations.begin()+i);
-    }
-  }
 }
