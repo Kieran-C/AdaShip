@@ -5,6 +5,8 @@
 #include <vector>
 #include "board.h"
 
+//function comments are above function declaration in header file
+
 board::board(mINI::INIStructure setup, std::string passedName){
   width = stoi(setup["board"]["x"]);
   height = stoi(setup["board"]["y"]);

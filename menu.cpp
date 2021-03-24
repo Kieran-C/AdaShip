@@ -6,7 +6,9 @@
 #include "menu.h"
 // #include "Ships.h"
 
+//function comments are above function declaration in header file
 
+//vector containing all the game modes 
 std::vector<std::string> modes{"One Player VS Computer", "Two Player Game", "One Player VS Computer (salvo)", "Two player game (salvo)", "One player v computer (hidden mines)", "Two player game (hidden mines)", "Computer v computer (hidden mines)", "Quit"}; 
 
 int mainMenu(){

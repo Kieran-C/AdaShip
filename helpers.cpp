@@ -4,6 +4,8 @@
 #include <random>
 #include "helpers.h"
 
+//function comments are above function declaration in header file
+
 int helpers::generateNumber(int maxValue){
     std::random_device rdev;
     std::mt19937 rgen(rdev());
