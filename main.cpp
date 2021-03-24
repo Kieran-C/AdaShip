@@ -9,12 +9,15 @@
 #include "helpers.h"
 #include "GameLoop.h"
 
-std::vector<Player> playerList;
-std::vector<std::vector<Ships>> allShipList;
+///Main.cpp is responsible for most of the inital setup and getting the game into the mainloop all configured properly. Ship validation happens here as well as ship placement, player creation and board creation
+
+std::vector<Player> playerList; //initalises list playerList which contains Player objects
+std::vector<std::vector<Ships>> allShipList; //inistalises allShipList which is a vector of vector of Ships objects
 std::vector<std::string> shipTypes {"carrier", "battleship", "destroyer", "submarine", "patrolBoat"};
 
 std::vector<char> alpha {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
+///createShips fucntion takes the number of ships needing creating and creates the correct number of ship objects and adds them to a list
 std::vector<Ships> createShips(int numOfShips, bool mines, mINI::INIStructure setup){
   std::vector<Ships> shipList;
   for (int i = 0; i < numOfShips; i++){
@@ -23,6 +26,7 @@ std::vector<Ships> createShips(int numOfShips, bool mines, mINI::INIStructure se
   return shipList;
 }
 
+///placeShips is responsible for adding the ships to the board. It contains all the code for ai placement and manual placement, which is toggled by the ai variable thats passed in. It returns an updated board map.
 std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, std::vector<Ships>& ships, bool ai){
   std::string autoPlace;
   std::string autoPlaceOne;
@@ -149,6 +153,7 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
   return board;
 }
 
+///gamemodeSetup setups all the player objects and triggers the creation of the appropriete ships and adds them to a list. Returns void
 void gamemodeSetup(int mode, mINI::INIStructure setup, board board1, board board2){
   switch(mode){
     case 1: {
@@ -200,6 +205,7 @@ void gamemodeSetup(int mode, mINI::INIStructure setup, board board1, board board
   }
 }
 
+///resetBoard clears the game board and reinitalizes it. It also removes the coords for the ship opbjects and sets them as not placed.
 std::vector<std::vector<int>> resetBoard(std::vector<std::vector<int>> passedBoard, board& b, mINI::INIStructure setup, std::vector<Ships>& ships){
   for (auto &i: passedBoard){
     i.clear();
@@ -213,6 +219,7 @@ std::vector<std::vector<int>> resetBoard(std::vector<std::vector<int>> passedBoa
   return b.createBoardMap(setup);
 }
 
+///areAllShipsPlaced is a simple function that goes through and check if each ship in the past list is placed. Returns true if they are, returns false if there not
 bool areAllShipsPlaced(std::vector<Ships> ships){
   int totalShipsPlaced = 0;
   for (auto &i: ships){
@@ -228,6 +235,7 @@ bool areAllShipsPlaced(std::vector<Ships> ships){
 
 }
 
+///main is the main function of the game, responsible for starting the game up and calling all the consequent functions. It creates the players board objects, players board maps, calls the function to get the main menu up, ensures everything is ready (all ships places etc.) before allowing gameloop to commence
 int main() {
   bool continueGame = false;
   std::cout << "Starting up...\n\n";
