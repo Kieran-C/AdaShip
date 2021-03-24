@@ -2,7 +2,7 @@
 #include "libarys/ini.h"
 
 mINI::INIStructure readIni(){
-  mINI::INIFile file("adashipConfig.ini");
+  mINI::INIFile file("adaship_config.ini");
   mINI::INIStructure ini;
   try {
     bool readSuccess = file.read(ini);
