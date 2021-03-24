@@ -25,6 +25,7 @@ std::vector<Ships> createShips(int numOfShips, bool mines, mINI::INIStructure se
 
 std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, std::vector<Ships>& ships, bool ai){
   std::string autoPlace;
+  std::string autoPlaceOne;
   if (!ai){
     bool autoValid = false;
     while(!autoValid){
@@ -40,6 +41,24 @@ std::vector<std::vector<int>> placeShips(std::vector<std::vector<int>> board, st
   }
   for (int i = 0; i < ships.size(); ++i){
     bool shipInvalid = true;
+    if (autoPlaceOne == "y"){
+      ai = false;
+    }
+    if (!ai){
+      bool valid = false;
+      while(!valid){
+        std::cout << std::endl << "Do you want to auto-place your " << ships[i].getType() << "? (y/n)";
+        std::cin.clear();
+        std::cin >> autoPlaceOne;
+        if(autoPlaceOne == "y"){
+          ai = true;
+          valid = true;
+        }else if (autoPlaceOne == "n"){
+          ai = false;
+          valid = true;
+        }
+      }
+    }
     while(shipInvalid){
       bool coordSelect = true;
       int yCoord;
@@ -204,6 +223,7 @@ int main() {
   std::vector<std::vector<int>> b2Board = b2.createBoardMap(setup);
   int mode = mainMenu();
   gamemodeSetup(mode, setup, b1, b2);
+  b1.boardDraw(setup, b1Board);
   b1Board = placeShips(b1Board, allShipList[0], false);
   b2Board = placeShips(b2Board, allShipList[1], true);
   b1.boardDraw(setup, b1Board);
