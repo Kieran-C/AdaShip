@@ -31,7 +31,6 @@ std::vector<int> convertPointToCoord(std::string point){
     }
   }
   std::vector<int> pointCoords {yCoord, xCoord};
-  std::cout << std::endl << "Y Coord: " << yCoord << "X Coord: " << xCoord << std::endl;
   return pointCoords;
 }
 
@@ -57,7 +56,6 @@ bool areAllPlayerShipsDead(std::vector<Ships> ships){
 }
 
 void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vector<std::vector<int>>& b1Board, std::vector<std::vector<int>>& b2Board, mINI::INIStructure setup, std::vector<std::vector<Ships>>& allShipList){
-  win(2);
   bool play = true;
   int turn = 1;
   Player& currentPlayer = player1;
@@ -88,7 +86,6 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
         std::string point = playerShooting();
         pointCoord = convertPointToCoord(point);
         if ((pointCoord[0] >= 0) && (pointCoord[0] < b1Board.size()) && (pointCoord[1] >= 0) && (pointCoord[1] < b1Board[0].size())){
-          std::cout << std::endl << "Valid Shot" << std::endl;
           valid = true;
         }else{std::cout << std::endl << "INVALID POINT" << std::endl;}
       }

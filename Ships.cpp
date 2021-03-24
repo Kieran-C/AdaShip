@@ -140,7 +140,8 @@ std::vector<std::vector<int>> Ships::isShipHit(std::vector<int> coords, std::vec
   auto yResult = std::find(Ships::shipYCoordinates.begin(), Ships::shipYCoordinates.end(), coords[0]);
   auto xResult = std::find(Ships::shipXCoordinates.begin(), Ships::shipXCoordinates.end(), coords[1]);
   if ((yResult != end(Ships::shipYCoordinates)) && (xResult != end(Ships::shipXCoordinates))){
-    std::cout << std::endl << "HIT SHIP AT: X - " << coords[1] << " Y - " << coords[0];
+    // std::cout << std::endl << "HIT SHIP AT: X - " << coords[1] << " Y - " << coords[0];
+    std::cout << std::endl << "HIT SHIP!" << std::endl;
     int indexYResult = std::distance(Ships::shipYCoordinates.begin(), yResult);
     int indexXResult = std::distance(Ships::shipXCoordinates.begin(), xResult);
     Ships::shipYCoordinates.erase(Ships::shipYCoordinates.begin() + indexYResult);
@@ -153,6 +154,7 @@ std::vector<std::vector<int>> Ships::isShipHit(std::vector<int> coords, std::vec
     if (board[coords[0]][coords[1]] == 0){
       board[coords[0]][coords[1]] = 7;
       updatedBoard = board;
+      std::cout << std::endl << "MISSED!" << std::endl;
     }else {
       updatedBoard = board;
     }
