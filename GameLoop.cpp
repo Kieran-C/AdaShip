@@ -105,13 +105,11 @@ void mainLoop(Player& player1, Player& player2, board& b1, board& b2, std::vecto
     if (currentPlayer.getPlayerType() == 1){
       endTurnSelection = gameLoopMenu();
     }else{
-      endTurnSelection = pressAnyKeyToContinue();
+      pressAnyKeyToContinue();
     }
-    std::cout << std::endl << "endTurnSelection: " << endTurnSelection;
     if (endTurnSelection == 1){
       std::cout << std::endl<< "Next Player...";
     }else if (endTurnSelection == 2){
-      std::cout << "DID THIS";
       shipOverview("Player " + std::to_string(currentPlayer.getPlayerId()), allShipList[0]);
     }else if (endTurnSelection == 3){
       exit(0);

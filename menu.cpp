@@ -2,8 +2,10 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <limits>
 #include "menu.h"
 // #include "Ships.h"
+
 
 std::vector<std::string> modes{"One Player VS Computer", "Two Player Game", "One Player VS Computer (salvo)", "Two player game (salvo)", "One player v computer (hidden mines)", "Two player game (hidden mines)", "Computer v computer (hidden mines)", "Quit"}; 
 
@@ -60,12 +62,13 @@ int confirmationMenu(){
     std::cout << "3 - Quit" << std::endl;
     std::cout << "Please choose option 1, 2 or 3: ";
     std::cin.ignore();
-    std::cin >> strSelection;
+    std::getline(std::cin, strSelection);
     if ((strSelection == "1") || (strSelection == "2") || (strSelection == "3")){
       selection = stoi(strSelection);
       valid = true;
+      return selection;
     }else{
-      std::cout << std::endl << "INVALID SELECTION" << std::endl;
+      std::cout << std::endl << "INVALID SELECTION - confirmation menu" << std::endl;
     }
   }
   return selection;
@@ -82,20 +85,20 @@ int gameLoopMenu(){
     std::cout << "3 - Quit" << std::endl;
     std::cout << "Please choose option 1, 2 or 3: ";
     std::cin.ignore();
-    std::cin >> selection;
+    std::cin >> strSelection;
     if ((strSelection == "1") || (strSelection == "2") || (strSelection == "3")){
       selection = stoi(strSelection);
       valid = true;
     }else{
-      std::cout << std::endl << "INVALID SELECTION" << std::endl;
+      std::cout << std::endl << "INVALID SELECTION - gameloop" << std::endl;
     }
   }
   return selection;
 }
 
-int pressAnyKeyToContinue(){
-  int temp;
-  std::cout << "Press any key to continue";
-  std::cin >> temp;
-  return 0;
+void pressAnyKeyToContinue(){
+  std::cin.clear();
+  std::cin.ignore(1000000000, '\n');
+  std::cout << std::endl << "Press Enter to continue" << std::endl;
+  std::cin.get();
 }
