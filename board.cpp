@@ -61,13 +61,15 @@ int board::boardDraw(mINI::INIStructure setup, std::vector<std::vector<int>> boa
             }else if (piece == 5){
               shipPiece = "P";
             }else if (piece == 6){
-              // shipPiece = "■";
+              printf("\033[31m");
               shipPiece = "h";
             }else if (piece == 7){
+              printf("\033[33m");
               shipPiece = "m";
-              // shipPiece = "m";
             }
-            std::cout << std::right <<std::setw(5)<< " " + shipPiece + "  " << "|";
+            std::cout << std::right <<std::setw(5)<< " " + shipPiece + "  ";
+            printf("\033[0m");
+            std::cout<< "|";
           }else{std::cout <<std::setw(6)<< "|";}
           
         }
